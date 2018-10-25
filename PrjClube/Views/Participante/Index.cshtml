@@ -1,0 +1,84 @@
+﻿@model  IEnumerable<Clube.Modelo.Modelo.Participante>
+@{
+    ViewBag.Title = "Clube do Bem";
+}
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="col-lg-4 pull-left"><h3>Membros</h3></div>
+        <div class="col-lg-1 pull-right"><button class="btn btn-info edit">&nbsp;&nbsp;Novo&nbsp;&nbsp;</button></div>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div class="col-lg-2">
+                @*<select class="form-control" name="tipoFiltro" id="tipoFiltro">
+                    <option value="0">Por Nome</option>
+                </select>*@
+            </div>
+
+            <div class="col-lg-4">
+                @*<div class="input-group input-group-sm">
+                    <input type="text" class="form-control" id="filtro" name="filtro" placeholder="Escolha seu tipo de filtro e pesquise aqui..." autofocus>
+                    <span class="input-group-btn">
+                        <button class="btn btn-info btn-flat" id="filtro-btn">
+                            Filtrar...
+                        </button>
+                    </span>
+                </div>*@ 
+            </div>
+        }
+    </section>
+    <section class="content">
+
+
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="col-sm-12">
+                    <table id="datatable" class="table table-striped table-bordered dataTable no-footer" role="grid" aria-describedby="datatable_info">
+                        <thead>
+                            <tr role="row">
+                                <th>
+                                    @Html.DisplayNameFor(model => model.dsApelido)
+                                </th>
+
+                                <th>
+                                    @Html.DisplayNameFor(model => model.nrTelefone)
+                                </th>
+
+                                <th>
+                                    @Html.DisplayNameFor(model => model.dtEntrada)
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null)
+                                {
+                                    foreach (var item in Model)
+                                    {
+                                    <tr role="row" class="odd">
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.dsApelido)
+                                        </td>
+                                    </tr>
+                                        <tr role="row" class="even">
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.nrDDD) - @Html.DisplayFor(modelItem => item.nrTelefone)
+                                            </td>
+
+                                        </tr>
+                                        <tr role="row" class="odd">
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.dtEntrada)
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    </div>
+

@@ -1,0 +1,71 @@
+﻿@model Clube.Modelo.Modelo.Login
+
+@{
+    Layout = null;
+}
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Clube do Bem</title>
+<!-- Tell the browser to be responsive to screen width -->
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<!-- Bootstrap 3.3.5 -->
+<link rel="stylesheet" href="~/Content/designer/bootstrap/css/bootstrap.min.css">
+
+<!-- Theme style -->
+<link rel="stylesheet" href="~/Content/designer/dist/css/AdminLTE.min.css">
+<!-- iCheck -->
+<link rel="stylesheet" href="~/Content/designer/plugins/iCheck/square/blue.css">
+<script src="~/Content/designer/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+<script src="~/Content/js/jquery.mask.min.js"></script>
+<script src="~/Content/js/jquery-3.3.1.js.js"></script>
+<script src="~/Content/js/Utilidade.js"></script>
+
+
+<script type="text/javascript">$("#nmLogin").mask("(00) 0000-00009");</script>
+
+
+<body class="hold-transition login-page skin-green" >
+    <div class="login-box">
+        <div class="login-logo">
+            <span style="color:#ffffff"><b>CLUBE DO BEM</b></span>
+        </div>
+        <div class="login-box-body">
+          
+
+            @using (Html.BeginForm("Login", "Login"))
+            {
+                @Html.ValidationSummary(true)
+                <div class="form-group has-feedback">
+
+                    <div class="form-group has-feedback">
+                        @Html.TextBoxFor(model => model.nmLogin, new { @class = "form-control", @placeholder = "Login", @required = "required", })
+                        @Html.ValidationMessageFor(model => model.nmLogin)
+                    </div>
+                    <div class="form-group has-feedback">
+                        @Html.PasswordFor(model => model.dsSenha, new { @class = "form-control", @placeholder = "Senha", @required = "required" })
+                        @Html.ValidationMessageFor(model => model.dsSenha)
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-8">
+                        </div>
+                        <div class="col-xs-4">
+                            <input type="submit" value="Entrar" class="btn btn-facebook btn-block btn-flat" />
+                        </div>
+                    </div>
+                </div>
+
+
+            }
+                </div>
+    </div>
+
+
+    @if (null != TempData["Mensagem"])
+    {
+        <script type="text/javascript">
+            exibirMensagem("Mensagem", '@TempData["Mensagem"]', '@TempData["TipoDialog"]');
+        </script>
+        TempData["Mensagem"] = null;
+    }
+</body>
+

@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Clube do Bem! | </title>
+
+    
+
+
+</head>
+<body class="nav-md">
+    <div class="container body">
+        <div class="main_container">
+            <div class="right_col" role="main" style="min-height: 1012px;">
+                @RenderBody()
+                <hr />
+              
+            </div>
+        </div>
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Todos os direitos reservados</p>
+        </footer>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+    <!-- jQuery -->
+    
+    <script src="~/Content/vendors/fullcalendar/dist/fullcalendar.min.js"></script>
+
+    <!-- Custom Theme Scripts -->
+    <script src="~/Content/build/js/custom.min.js"></script>
+    s
+
+
+   
+</body>
+</html>

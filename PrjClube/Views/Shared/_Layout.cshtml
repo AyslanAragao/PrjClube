@@ -1,0 +1,40 @@
+﻿  <!-- METATAGS TEMPLATE - INICIO -->
+@{Html.RenderPartial("_MetaTags_Template");}
+<!-- METATAGS TEMPLATE - FIM -->
+<body class="hold-transition skin-green sidebar-mini">
+    <div class="wrapper">
+        <!-- TOPO - INICIO -->
+        @* include _Topo_Template.php *@
+        @{Html.RenderPartial("_Topo_Template");}
+        <!-- TOPO - FIM -->
+        <!-- MENU ESQUERDO - INICIO -->
+
+        @{Html.RenderPartial("_MenuEsquerdo_Template");}
+        <!-- MENU ESQUERDO - FIM -->
+        @RenderBody()
+       
+        <!-- RODAPE - INICIO -->
+        @* include _Rodape_Template.php *@
+        @{Html.RenderPartial("_Rodape_Template");}
+        <!-- RODAPE - FIM -->
+        <!-- MENU CONTROLE DIREITO - INICIO -->
+        @* include _MenuControleDireito_Template.php *@
+        @{Html.RenderPartial("_MenuControleDireito_Template");}
+        <!-- MENU CONTROLE DIREITO - FIM -->
+    </div><!-- ./wrapper -->
+    <!-- SCRIPTS TEMPLATE - INICIO -->
+    @{Html.RenderPartial("_Scripts_Template");}
+    @* include _Scripts_Template.php *@
+    <!-- SCRIPTS TEMPLATE - FIM -->
+
+    @if (null != TempData["Mensagem"])
+    {
+        <script type="text/javascript">
+            exibirMensagem("Mensagem", '@TempData["Mensagem"]', '@TempData["TipoDialog"]');
+        </script>
+        TempData["Mensagem"] = null;
+    }
+
+</body>
+
+
