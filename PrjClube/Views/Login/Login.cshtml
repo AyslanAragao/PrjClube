@@ -18,11 +18,9 @@
 <script src="~/Content/designer/plugins/jQuery/jQuery-2.1.4.min.js"></script>
 <script src="~/Content/js/jquery.mask.min.js"></script>
 <script src="~/Content/js/jquery-3.3.1.js.js"></script>
-<script src="~/Content/js/Utilidade.js"></script>
 
 
 <script type="text/javascript">$("#nmLogin").mask("(00) 0000-00009");</script>
-
 
 <body class="hold-transition login-page skin-green" >
     <div class="login-box">
@@ -38,7 +36,7 @@
                 <div class="form-group has-feedback">
 
                     <div class="form-group has-feedback">
-                        @Html.TextBoxFor(model => model.nmLogin, new { @class = "form-control", @placeholder = "Login", @required = "required", })
+                        @Html.TextBoxFor(model => model.nmLogin, new { @class = "form-control", @placeholder = "Login", @required = "required" })
                         @Html.ValidationMessageFor(model => model.nmLogin)
                     </div>
                     <div class="form-group has-feedback">

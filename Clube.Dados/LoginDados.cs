@@ -9,7 +9,7 @@ using System.Data;
 
 namespace Clube.Dados
 {
-    public class LoginDados : Login
+    public class LoginDados: Login 
     {
 
         IAcessoDados D;
@@ -49,8 +49,7 @@ namespace Clube.Dados
             }
             catch (Exception ex)
             {
-                return true;
-                //throw new Exception(ex.Message);
+                throw new Exception(ex.Message);
             }
 
         }
