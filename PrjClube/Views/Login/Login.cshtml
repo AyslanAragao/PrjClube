@@ -22,13 +22,25 @@
 
 <script type="text/javascript">$("#nmLogin").mask("(00) 0000-00009");</script>
 
-<body class="hold-transition login-page skin-green" >
+@if (null != TempData["Mensagem"])
+{
+    <div class="alert alert-@TempData["TipoDialog"] alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        @TempData["Mensagem"];
+    </div>
+    TempData["Mensagem"] = null;
+
+}
+
+<body class="hold-transition login-page skin-green">
     <div class="login-box">
         <div class="login-logo">
             <span style="color:#ffffff"><b>CLUBE DO BEM</b></span>
         </div>
         <div class="login-box-body">
-          
+
 
             @using (Html.BeginForm("Login", "Login"))
             {
@@ -54,16 +66,7 @@
 
 
             }
-                </div>
+        </div>
     </div>
-
-
-    @if (null != TempData["Mensagem"])
-    {
-        <script type="text/javascript">
-            exibirMensagem("Mensagem", '@TempData["Mensagem"]', '@TempData["TipoDialog"]');
-        </script>
-        TempData["Mensagem"] = null;
-    }
 </body>
 

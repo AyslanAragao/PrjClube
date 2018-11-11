@@ -31,13 +31,16 @@ namespace PrjClube.Controllers
         {
             return View();
         }
-
+        public ActionResult _mdlCadastrar()
+        {
+            return PartialView();
+        }
         [HttpPost]
         public ActionResult Cadastrar(Participante item)
         {
             try
             {
-                _negocio.CadastrarNegocio(item);
+                //_negocio.CadastrarNegocio(item);
                 TempData["Mensagem"] = "Participante cadastrado com sucesso";
                 return RedirectToAction("Index");
             }
@@ -50,6 +53,9 @@ namespace PrjClube.Controllers
             }
         }
 
-
+        public ActionResult _mdlNovaDoacao()
+        {
+            return PartialView();
+        }
     }
 }

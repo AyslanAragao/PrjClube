@@ -16,31 +16,46 @@
             </div><!-- /.box-header -->
             <div class="box-body">
 
-              @using (Html.BeginForm())
-              {
-                @Html.AntiForgeryToken()
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
 
+                    <div class="container">
                         <!-- text input -->
-                    <div class="form-group">
+                        <div class="form-group row">
+                            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                                <label>@Html.DisplayNameFor(model => model.nmParticipante)</label>
+                                @Html.TextBoxFor(model => model.nmParticipante, new { @class = "form-control", @required = "required" })
+                                @Html.ValidationMessageFor(model => model.nmParticipante)
+                            </div>
+                            <div class="col-sm-9 col-md-9 col-lg-9 col-xl-9">
+                                <label>@Html.DisplayNameFor(model => model.dsApelido)</label>
+                                @Html.TextBoxFor(model => model.dsApelido, new { @class = "form-control", @required = "required" })
+                                @Html.ValidationMessageFor(model => model.dsApelido)
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-1 col-md-1 col-lg-1 col-xl-1">
+                                <label>@Html.DisplayNameFor(model => model.nrDDD)</label>
+                                @Html.TextBoxFor(model => model.nrDDD, new { @class = "form-control", @required = "required" })
+                                @Html.ValidationMessageFor(model => model.nrDDD)
+                            </div>
 
-                        <label>@Html.DisplayNameFor(model => model.nmParticipante)</label>
-                        @Html.TextBoxFor(model => model.nmParticipante, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.nmParticipante)
-                   
-                        <label>@Html.DisplayNameFor(model => model.dsApelido)</label>
-                        @Html.TextBoxFor(model => model.dsApelido, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.dsApelido)
+                            <div class="col-sm-11 col-md-11 col-lg-11 col-xl-11">
+                                <label>@Html.DisplayNameFor(model => model.nrTelefone)</label>
+                                @Html.TextBoxFor(model => model.nrTelefone, new { @class = "form-control", @required = "required" })
+                                @Html.ValidationMessageFor(model => model.nrTelefone)
+                            </div>
+                            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-6">
+                                <label class="text-black">Indicado por: </label>
+                                <select class="form-control" id="ddAdms" name="cdPartIndicador">
+                                    <option value="0">Nenhuma Indicação</option>
+                                    <option value="1">Sidnei</option>
+                                    <option value="2">Edenir</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label>@Html.DisplayNameFor(model => model.nrDDD)</label>
-                        @Html.TextBoxFor(model => model.nrDDD, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.nrDDD)
-
-                        <label>@Html.DisplayNameFor(model => model.nrTelefone)</label>
-                        @Html.TextBoxFor(model => model.nrTelefone, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.nrTelefone)
-                    </div>
-                
                     <div class="col-lg-2" align="center">
                         <div class="form-group">
                             <button class="btn btn-facebook" id="save-btn">
@@ -48,8 +63,6 @@
                             </button>
                         </div>
                     </div>
-                
-
                 }
             </div>
         </div>

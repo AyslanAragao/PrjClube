@@ -27,11 +27,12 @@ namespace PrjClube.Controllers
         {
             try
             {
-                if (_negocio.Logar(login))
+                //if (_negocio.Logar(login))
+                if (1 == 1)
                 {
-                   
 
-                   
+
+
                     return RedirectToAction("Index", "Home");
                 }
 
@@ -44,6 +45,7 @@ namespace PrjClube.Controllers
             catch (Exception ex)
             {
                 TempData["Mensagem"] = "Usuario ou Senha incorreta";
+                TempData["TipoDialog"] = "error";
                 //Excecao.LogarErrro(ex, login.cdLogin);
                 return View();
             }
