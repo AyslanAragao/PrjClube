@@ -1267,7 +1267,7 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Participante\_mdlCadastrar.cshtml" />
-    <Content Include="Views\Participante\_mdlNovaDoacao.cshtml" />
+    <Content Include="Views\Home\_mdlNovaDoacao.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

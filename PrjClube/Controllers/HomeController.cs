@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Clube.Modelo.Modelo;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -25,6 +26,17 @@ namespace PrjClube.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+
+        public ActionResult _mdlNovaDoacao()
+        {
+            return PartialView();
+        }
+        [HttpPost]
+        public ActionResult _mdlNovaDoacao(Doacao doacao)
+        {
+            TempData["Mensagem"] = "Doação cadastrado com sucesso";
+            return RedirectToAction("Index");
         }
     }
 }

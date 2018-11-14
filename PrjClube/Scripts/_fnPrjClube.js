@@ -12,9 +12,3 @@ function SomenteNumero(e) {
         else return false;
     }
 };
-$(function () {
-    $('input[name="dtDoacao"]').datepicker({
-        singleDatePicker: true,
-        showDropdowns: true
-    });
-});

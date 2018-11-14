@@ -52,10 +52,5 @@ namespace PrjClube.Controllers
 
             }
         }
-
-        public ActionResult _mdlNovaDoacao()
-        {
-            return PartialView();
-        }
     }
 }

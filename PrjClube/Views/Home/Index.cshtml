@@ -5,7 +5,10 @@
 <div class="content-wrapper">
     <section class="content-header">
         <div class="col-lg-4 pull-left"><h3>Planilha Financeira <small>Visão Geral</small></h3></div>
-        <div class="col-lg-2 pull-right"></div>
+        <div class="col-lg-2 pull-right">
+            @*<a class="btn btn-primary edit" role="button" href="@Url.Action("Cadastrar","Participante")">Novo </a>*@
+            <button class="btn btn-info edit" onclick="AbrirModal('#modal','_mdlNovaDoacao')">Registrar Doação</button>
+        </div>
         @using (Html.BeginForm())
         {
             @Html.AntiForgeryToken()
@@ -15,23 +18,23 @@
                 </select>
             </div>
 
-                <div class="col-lg-4">
-                    <div class="input-group input-group-sm">
-                        <input type="text" class="form-control" id="filtro" name="filtro" placeholder="Escolha seu tipo de filtro e pesquise aqui..." autofocus>
-                        <span class="input-group-btn">
-                            <button class="btn btn-info btn-flat" id="filtro-btn">
-                                Filtrar...
-                            </button>
-                        </span>
-                    </div><!-- /input-group -->
-                </div>
+            <div class="col-lg-4">
+                <div class="input-group input-group-sm">
+                    <input type="text" class="form-control" id="filtro" name="filtro" placeholder="Escolha seu tipo de filtro e pesquise aqui..." autofocus>
+                    <span class="input-group-btn">
+                        <button class="btn btn-info btn-flat" id="filtro-btn">
+                            Filtrar...
+                        </button>
+                    </span>
+                </div><!-- /input-group -->
+            </div>
         }
     </section>
     <section class="content">
         <div class="row">
             <div class="col-xs-12">
                 <div class="box">
-                  
+
                     <div class="row">
 
                         <div class="col-sm-12">
@@ -95,7 +98,10 @@
                 </div>
             </div>
         </div>
-       
+
     </section>
 </div>
 
+<div class="modal fade" id="modal">
+
+</div>
