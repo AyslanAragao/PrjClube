@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace Clube.Negocio.Interface
 {
-    public interface IParticipanteNegocio: IBaseNegocio<Participante>
-    { 
-       
+    public interface IParticipanteNegocio : IBaseNegocio<Participante>
+    {
+        IEnumerable<Participante> ListarTodos();
     }
 }

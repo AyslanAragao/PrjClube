@@ -22,8 +22,10 @@ namespace Clube.Modelo.Modelo
         [DisplayName("Login de Cadastro")]
         public int cdLoginCadastro { set; get; }
         [DisplayName("Data de Cadastro")]
-        public DateTime dtCadastro { set; get; }
+        public DateTime dtCadastro { set; get; } = DateTime.Now;
         [DisplayName("GeraLogin")]
         public bool flGeraLogin { set; get; }
+
+        public virtual Participante Indicador { get; set; }
     }
 }

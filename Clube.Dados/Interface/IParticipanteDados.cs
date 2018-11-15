@@ -9,7 +9,6 @@ namespace Clube.Dados.Interface
 {
     public interface IParticipanteDados : IBase<Participante>
     {
-      
-       
+        IEnumerable<Participante> ListarTodos();
     }
 }

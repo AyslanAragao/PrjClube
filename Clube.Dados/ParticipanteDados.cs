@@ -30,9 +30,6 @@ namespace Clube.Dados
 
             D.ExecProcedure("sp_cadParticipante");
 
-
-
-
         }
 
         public IEnumerable<Participante> ConsultarDados()
@@ -53,6 +50,41 @@ namespace Clube.Dados
         public void DeletarDados(int id)
         {
             throw new NotImplementedException();
+        }
+
+        public IEnumerable<Participante> ListarTodos()
+        {
+            List<Participante> participantes = new List<Participante>();
+            Participante Sidnei = new Participante()
+            {
+                cdLoginCadastro = 1,
+                cdParticipante = 1,
+                cdPartIndicador = 0,
+                dsApelido = "Sidnei Coach",
+                dtCadastro = DateTime.Parse("10/10/2018"),
+                dtEntrada = DateTime.Today,
+                flGeraLogin = false,
+                nmParticipante = "Sidnei",
+                nrDDD = "79",
+                nrTelefone = "888888888",
+                Indicador = null
+            }; participantes.Add(Sidnei);
+            Participante Edenir = new Participante()
+            {
+                cdLoginCadastro = 2,
+                cdParticipante = 2,
+                cdPartIndicador = 0,
+                dsApelido = "Edenir não Coach",
+                dtCadastro = DateTime.Parse("11/10/2018"),
+                dtEntrada = DateTime.Today,
+                flGeraLogin = false,
+                nmParticipante = "Edenir",
+                nrDDD = "80",
+                nrTelefone = "999999999",
+                Indicador = null
+            };participantes.Add(Edenir);
+
+            return participantes;
         }
     }
 }

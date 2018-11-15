@@ -30,7 +30,7 @@
                             <label>@Html.DisplayNameFor(model => model.dsApelido)</label>
                             @*@Html.TextBoxFor(model => model.dsApelido, new { @class = "form-control", @required = "required" })
                     @Html.ValidationMessageFor(model => model.dsApelido)*@
-                            <input type="text" name="Apelido" class="form-control" maxlength="30" />
+                            <input type="text" name="dsApelido" class="form-control" maxlength="30" />
                         </div>
                     </div>
                     <div class="row">
@@ -51,11 +51,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <label class="text-black">Indicado por: </label>
-                            <select class="form-control" id="ddAdms" name="cdPartIndicador">
-                                <option value="0">Nenhuma Indicação</option>
-                                <option value="1">Sidnei</option>
-                                <option value="2">Edenir</option>
-                            </select>
+                            <select id="ddIndicacao" name="cdPartIndicador" class="form-control"></select>
                         </div>
                     </div>
                 </div>
@@ -69,3 +65,40 @@
         }
     </div>
 </div>
+
+<script>
+    $(function () {
+        $('select[name="cdPartIndicador"]').ready(function () {
+            var helpers =
+            {
+                buildDropdown: function (result, dropdown, emptyMessage) {
+                    // Remove current options
+                    dropdown.html('');
+                    // Add the empty option with the empty message
+                    dropdown.append('<option value="0">' + emptyMessage + '</option>');
+                    // Check result isnt empty
+                    if (result != '') {
+                        // Loop through each of the results and append the option to the dropdown
+                        $.each(result, function (k, v) {
+                            dropdown.append('<option value="' + v.cdParticipante + '">' + v.dsApelido + '</option>');
+                        });
+                    }
+                }
+            }
+
+            $.ajax({
+                type: "GET",
+                url: 'http://' + window.location.host + '/PrjClube/Participante/ListarParticipantes',
+                success: function (data) {
+                    helpers.buildDropdown(
+                        jQuery.parseJSON(data),
+                        $('select[id="ddIndicacao"]'),
+                        'Selecione um Participante'
+                    );
+                },
+                cache: false
+            });
+            return false;
+        });
+    });
+</script>

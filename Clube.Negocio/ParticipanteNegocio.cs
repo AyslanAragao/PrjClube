@@ -47,5 +47,10 @@ namespace Clube.Negocio
         {
             throw new NotImplementedException();
         }
+
+        public IEnumerable<Participante> ListarTodos()
+        {
+            return _dados.ListarTodos();
+        }
     }
 }

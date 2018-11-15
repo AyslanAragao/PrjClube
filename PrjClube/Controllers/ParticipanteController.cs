@@ -1,6 +1,7 @@
 ﻿using Clube.Modelo.Modelo;
 using Clube.Negocio;
 using Clube.Negocio.Interface;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +24,17 @@ namespace PrjClube.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            var grid = Session["Grid"] != null ? (List<Participante>)Session["Grid"] : (List<Participante>)_negocio.ListarTodos();
+
+            if (Session["ParticipanteCadastrado"] != null)
+            {
+                var participante = (Participante)Session["ParticipanteCadastrado"];
+                grid.Add(participante);
+            }
+            
+            Session["Grid"] = grid;
+            return View(grid);
+
         }
 
 
@@ -40,7 +51,14 @@ namespace PrjClube.Controllers
         {
             try
             {
+                var participantes = (List<Participante>)Session["Grid"];
+
+                var participante = participantes.Where(m => m.cdParticipante == item.cdPartIndicador).ToList();
+
+                item.Indicador = participante[0];
+
                 //_negocio.CadastrarNegocio(item);
+                Session["ParticipanteCadastrado"] = item;
                 TempData["Mensagem"] = "Participante cadastrado com sucesso";
                 return RedirectToAction("Index");
             }
@@ -51,6 +69,19 @@ namespace PrjClube.Controllers
                 return View();
 
             }
+        }
+
+        public string ListarParticipantes()
+        {
+            var participantes = _negocio.ListarTodos();
+            if (Session["Grid"] != null)
+            {
+                var sessao = (List<Participante>)Session["Grid"];
+                participantes.Concat(sessao);
+            }
+            var retorno = JsonConvert.SerializeObject(participantes);
+
+            return retorno;
         }
     }
 }
