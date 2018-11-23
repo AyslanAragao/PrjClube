@@ -14,10 +14,11 @@ namespace Clube.Negocio
     {
         IParticipanteDados _dados;
 
-        public ParticipanteNegocio(){
+        public ParticipanteNegocio()
+        {
             _dados = new ParticipanteDados();
-            
-            }
+
+        }
         public void AtualizarNegocio(Participante item)
         {
             throw new NotImplementedException();
@@ -51,6 +52,11 @@ namespace Clube.Negocio
         public IEnumerable<Participante> ListarTodos()
         {
             return _dados.ListarTodos();
+        }
+
+        public Participante getByID(int id)
+        {
+            return _dados.getByID(id);
         }
     }
 }

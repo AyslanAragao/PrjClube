@@ -10,11 +10,45 @@ using Clube.Dados;
 
 namespace Clube.Dados
 {
-    public class ParticipanteDados : Participante, IParticipanteDados 
+    public class ParticipanteDados : Participante, IParticipanteDados
     {
 
         IAcessoDados D;
+        List<Participante> participantes;
+        public ParticipanteDados()
+        {
 
+            participantes = new List<Participante>();
+            Participante Sidnei = new Participante()
+            {
+                cdLoginCadastro = 1,
+                cdParticipante = 1,
+                cdPartIndicador = 0,
+                dsApelido = "Sidnei Coach",
+                dtCadastro = DateTime.Parse("10/10/2018"),
+                dtEntrada = DateTime.Today,
+                flGeraLogin = false,
+                nmParticipante = "Sidnei",
+                nrDDD = "79",
+                nrTelefone = "888888888",
+                Indicador = null
+            }; participantes.Add(Sidnei);
+            Participante Edenir = new Participante()
+            {
+                cdLoginCadastro = 2,
+                cdParticipante = 2,
+                cdPartIndicador = 0,
+                dsApelido = "Edenir não Coach",
+                dtCadastro = DateTime.Parse("11/10/2018"),
+                dtEntrada = DateTime.Today,
+                flGeraLogin = false,
+                nmParticipante = "Edenir",
+                nrDDD = "80",
+                nrTelefone = "999999999",
+                Indicador = null
+            }; participantes.Add(Edenir);
+
+        }
         public void AtualizarDados(Participante item)
         {
             throw new NotImplementedException();
@@ -54,37 +88,13 @@ namespace Clube.Dados
 
         public IEnumerable<Participante> ListarTodos()
         {
-            List<Participante> participantes = new List<Participante>();
-            Participante Sidnei = new Participante()
-            {
-                cdLoginCadastro = 1,
-                cdParticipante = 1,
-                cdPartIndicador = 0,
-                dsApelido = "Sidnei Coach",
-                dtCadastro = DateTime.Parse("10/10/2018"),
-                dtEntrada = DateTime.Today,
-                flGeraLogin = false,
-                nmParticipante = "Sidnei",
-                nrDDD = "79",
-                nrTelefone = "888888888",
-                Indicador = null
-            }; participantes.Add(Sidnei);
-            Participante Edenir = new Participante()
-            {
-                cdLoginCadastro = 2,
-                cdParticipante = 2,
-                cdPartIndicador = 0,
-                dsApelido = "Edenir não Coach",
-                dtCadastro = DateTime.Parse("11/10/2018"),
-                dtEntrada = DateTime.Today,
-                flGeraLogin = false,
-                nmParticipante = "Edenir",
-                nrDDD = "80",
-                nrTelefone = "999999999",
-                Indicador = null
-            };participantes.Add(Edenir);
 
             return participantes;
+        }
+
+        public Participante getByID(int id)
+        {
+            return participantes.Find(model => model.cdParticipante == id);
         }
     }
 }

@@ -50,6 +50,7 @@
                                 <th>@Html.DisplayNameFor(m => m.dtCadastro)</th>
                                 <th>@Html.DisplayNameFor(m => m.dtEntrada)</th>
                                 <th class="text-center">@Html.DisplayNameFor(m => m.cdPartIndicador)</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -72,6 +73,7 @@
                                         {
                                             <td>@item.Indicador.nmParticipante</td>
                                         }
+                                        <td><button class="btn btn-info edit" onclick="AbrirModal('#modal','_mdlCadastrar/@item.cdParticipante')">Editar</button></td>
                                     </tr>
                                 }
                             }

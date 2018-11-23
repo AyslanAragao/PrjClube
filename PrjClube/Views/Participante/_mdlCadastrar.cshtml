@@ -1,7 +1,7 @@
 ﻿@model Clube.Modelo.Modelo.Participante
 
 @{
-    ViewBag.Title = "Novo Participante";
+    //ViewBag.Title = "Novo Participante";
 }
 <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -24,13 +24,13 @@
                             <label>@Html.DisplayNameFor(model => model.nmParticipante)</label>
                             @*@Html.TextBoxFor(model => model.nmParticipante, new { @class = "form-control", @required = "required" })
                     @Html.ValidationMessageFor(model => model.nmParticipante)*@
-                            <input type="text" name="nmParticipante" class="form-control" maxlength="30" required />
+                            <input type="text" name="nmParticipante" class="form-control" maxlength="30" value="@Model.nmParticipante" required  />
                         </div>
                         <div class="col-md-6 ">
                             <label>@Html.DisplayNameFor(model => model.dsApelido)</label>
                             @*@Html.TextBoxFor(model => model.dsApelido, new { @class = "form-control", @required = "required" })
                     @Html.ValidationMessageFor(model => model.dsApelido)*@
-                            <input type="text" name="dsApelido" class="form-control" maxlength="30" />
+                            <input type="text" name="dsApelido" class="form-control" maxlength="30" value="@Model.dsApelido" />
                         </div>
                     </div>
                     <div class="row">
@@ -38,14 +38,14 @@
                             <label>@Html.DisplayNameFor(model => model.nrDDD)</label>
                             @*@Html.TextBoxFor(model => model.nrDDD, new { @class = "form-control", @required = "required" })
                     @Html.ValidationMessageFor(model => model.nrDDD)*@
-                            <input type="text" name="nrDDD" class="form-control" maxlength="2" minlength="2" onkeypress='return SomenteNumero(event)' required />
+                            <input type="text" name="nrDDD" class="form-control" maxlength="2" minlength="2" onkeypress='return SomenteNumero(event)' value="@Model.nrDDD" required />
                         </div>
 
                         <div class="col-md-10">
                             <label>@Html.DisplayNameFor(model => model.nrTelefone)</label>
                             @*@Html.TextBoxFor(model => model.nrTelefone, new { @class = "form-control", @required = "required" })
                     @Html.ValidationMessageFor(model => model.nrTelefone)*@
-                            <input type="text" name="nrTelefone" class="form-control" maxlength="9" minlength="9" onkeypress='return SomenteNumero(event)' required />
+                            <input type="text" name="nrTelefone" class="form-control" maxlength="9" minlength="9" onkeypress='return SomenteNumero(event)' value="@Model.nrTelefone" required />
                         </div>
                     </div>
                     <div class="row">

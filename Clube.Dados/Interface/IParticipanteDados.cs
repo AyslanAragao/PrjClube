@@ -10,5 +10,6 @@ namespace Clube.Dados.Interface
     public interface IParticipanteDados : IBase<Participante>
     {
         IEnumerable<Participante> ListarTodos();
+        Participante getByID(int id);
     }
 }

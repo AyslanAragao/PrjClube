@@ -31,7 +31,7 @@ namespace PrjClube.Controllers
                 var participante = (Participante)Session["ParticipanteCadastrado"];
                 grid.Add(participante);
             }
-            
+
             Session["Grid"] = grid;
             return View(grid);
 
@@ -42,9 +42,23 @@ namespace PrjClube.Controllers
         {
             return View();
         }
-        public ActionResult _mdlCadastrar()
+        //public ActionResult _mdlCadastrar()
+        //{
+        //    return PartialView();
+        //}
+        public ActionResult _mdlCadastrar(int? id)
         {
-            return PartialView();
+            if (null == id || id == 0)
+            {
+                Participante parti = new Participante();
+                ViewBag.Title = "Novo Participante";
+                return PartialView(parti);
+            }
+            var participante = _negocio.getByID((int)id);
+            ViewBag.Title = "Edição de Participante";
+            return PartialView(participante);
+
+
         }
         [HttpPost]
         public ActionResult Cadastrar(Participante item)

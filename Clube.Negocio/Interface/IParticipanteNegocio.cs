@@ -10,5 +10,6 @@ namespace Clube.Negocio.Interface
     public interface IParticipanteNegocio : IBaseNegocio<Participante>
     {
         IEnumerable<Participante> ListarTodos();
+        Participante getByID(int id);
     }
 }
