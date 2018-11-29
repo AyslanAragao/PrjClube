@@ -49,8 +49,24 @@ namespace Clube.Dados
             }; participantes.Add(Edenir);
 
         }
+
         public void AtualizarDados(Participante item)
         {
+            var quemIndicou = participantes.Where(m => m.cdParticipante == item.cdPartIndicador).ToList();
+
+            for (int i = 0; i < participantes.Count(); i++)
+            {
+                if (participantes[i].cdParticipante == item.cdParticipante)
+                {
+                    participantes[i] = item;
+                    if (quemIndicou.Count() > 0)
+                    {
+                        participantes[i].cdPartIndicador = quemIndicou[0].cdParticipante;
+                        participantes[i].Indicador = quemIndicou[0];
+                    }
+                }
+            }
+
             throw new NotImplementedException();
         }
 
