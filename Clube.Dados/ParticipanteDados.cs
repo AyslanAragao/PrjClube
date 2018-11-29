@@ -68,7 +68,11 @@ namespace Clube.Dados
 
         public IEnumerable<Participante> ConsultarDados()
         {
-            throw new NotImplementedException();
+            DataTable tabela;
+            D = new AcessoDados();
+            tabela = D.GetDataTable("sp_consParticipante");
+
+            return CarregaDados(tabela);
         }
 
         public IEnumerable<Participante> ConsultarDados(Participante item)
@@ -96,5 +100,22 @@ namespace Clube.Dados
         {
             return participantes.Find(model => model.cdParticipante == id);
         }
+
+        public IEnumerable<Participante> CarregaDados(DataTable tb)
+        {
+            foreach (DataRow row in tb.Rows)
+            {
+                yield return new Participante
+                {
+                    cdParticipante = Convert.ToInt32((row["cdParticipante"])),
+                    dsApelido = (row["dsApelido"]).ToString(),
+                  
+                };
+            }
+
+        }
+
+
+
     }
 }

@@ -21,12 +21,15 @@
                         <!-- text input -->
                         <label for="ddParticipante">Doador: </label>
                         <div class="form-group">
-                            <select id="ddParticipante" class="form-control" name="cdParticipante">
+                            @*<select id="ddParticipante" class="form-control" name="Participante">
                                 <option value="0">Selecione um Participante</option>
                                 <option value="1">Participante #1</option>
                                 <option value="2">Participante #2</option>
                                 <option value="3">Participante #3</option>
-                            </select>
+                            </select>*@
+                            @Html.DropDownListFor(model => model.cdParticipante, new SelectList(ViewBag.Participantes, "cdParticipante", "dsApelido"))
+
+
                             <span id="msgParticipante" class="hidden">Quem fez essa doação? Me informe por favor. <i class="em em-slightly_smiling_face"></i></span>
                         </div>
 
@@ -38,18 +41,20 @@
 
                         <label for="data">Data da Doação</label>
                         <div class=" form-group">
-                            <input type="text" class="form-control" name="dtDoacao" autocomplete="off" required="required" />
+                            @Html.TextBoxFor(model => model.dtDoacao, new { @class = "form-control", @name = "dtDoacao", @required = "required", @autocomplete = "off" })
+                            
                             <span id="msgData" class="hidden">Qual foi o dia que essa pessoa entregou a doação? <i class="em em-thinking_face"></i></span>
                         </div>
 
                         <label for="ddPagamento">Forma de Pagamento: </label>
                         <div class="form-group">
-                            <select id="ddPagamento" class="form-control" name="metodoPagamento">
+                            @*<select id="ddPagamento" class="form-control" name="metodoPagamento">
                                 <option value="0">Selecione uma forma</option>
                                 <option value="1">A vista</option>
                                 <option value="2">Transf. Conta Sidnei</option>
                                 <option value="3">Transf. Conta Edenir</option>
-                            </select>
+                            </select>*@
+                            @Html.DropDownListFor(model => model.modoPagamento, new SelectList(ViewBag.Pagamentos, "cdTipoPagamento", "dsTipoPagamento"))
                             <span id="msgPagamento" class="hidden">Ué!? Você não precisa registrar como ele pagou? <i class="em em-laughing"></i></span>
                         </div>
 
@@ -68,9 +73,9 @@
         (function () {
             var msg;
             var barrar = false;
-            $('#ddParticipante').change(function () {
-                msg = $('#msgParticipante');
-                valor = $('#ddParticipante');
+            $('#cdParticipante').change(function () {
+                msg = $('#dsApelido');
+                valor = $('#cdParticipante');
                 if (valor.val() != 0) {
                     valor.closest('.form-group').removeClass('has-error');
                     msg.addClass('hidden').removeClass('text-red');
@@ -84,9 +89,9 @@
                     autoUpdateInput: true
                 });
 
-            $('#ddPagamento').change(function () {
-                msg = $('#msgPagamento');
-                valor = $('#ddPagamento');
+            $('#modoPagamento').change(function () {
+                msg = $('#dsTipoPagamento');
+                valor = $('#cdTipoPagamento');
                 if (valor.val() != 0) {
                     valor.closest('.form-group').removeClass('has-error');
                     msg.addClass('hidden').removeClass('text-red');
@@ -117,7 +122,7 @@
                 barrar = false;
             }
 
-            msg = $('#msgPagamento');
+            msg = $('#ddPagamento');
             valor = $('#ddPagamento');
             if (valor.val() == 0) {
                 valor.closest('.form-group').addClass('has-error');

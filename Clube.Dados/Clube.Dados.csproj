@@ -44,8 +44,12 @@
     <Compile Include="AcessoDados.cs" />
     <Compile Include="Base.cs" />
     <Compile Include="Interface\IAcessoDados.cs" />
+    <Compile Include="Interface\IDoacaoDados.cs" />
+    <Compile Include="Interface\ITipoPagamentoDados.cs" />
     <Compile Include="Interface\IParticipanteDados.cs" />
     <Compile Include="Interface\IBase.cs" />
+    <Compile Include="DoacaoDados.cs" />
+    <Compile Include="TipoPagamentoDados.cs" />
     <Compile Include="ParticipanteDados.cs" />
     <Compile Include="LoginDados.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

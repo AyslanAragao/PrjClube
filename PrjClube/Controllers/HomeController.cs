@@ -1,4 +1,6 @@
 ﻿using Clube.Modelo.Modelo;
+using Clube.Negocio;
+using Clube.Negocio.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +11,22 @@ namespace PrjClube.Controllers
 {
     public class HomeController : Controller
     {
+        IParticipanteNegocio _ServicoParticioante;
+        ITipoPagamentoNegocio _ServicoPagamento;
+        IDoacaoNegocio _Servico;
+
+        public HomeController()
+        {
+            _ServicoParticioante = new ParticipanteNegocio();
+            _ServicoPagamento = new TipoPagamentoNegocio();
+            _Servico = new DoacaoNegocio();
+
+        }
         public ActionResult Index()
         {
-            return View();
+            ViewBags();
+            var doacoes = _Servico.ConsultarNegocio();
+            return View(doacoes);
         }
 
         public ActionResult About()
@@ -30,13 +45,24 @@ namespace PrjClube.Controllers
 
         public ActionResult _mdlNovaDoacao()
         {
+            ViewBags();
             return PartialView();
         }
         [HttpPost]
         public ActionResult _mdlNovaDoacao(Doacao doacao)
         {
+            _Servico.CadastrarNegocio(doacao);
             TempData["Mensagem"] = "Doação cadastrado com sucesso";
             return RedirectToAction("Index");
         }
+
+
+        public void ViewBags()
+        {
+            ViewBag.Participantes = _ServicoParticioante.ConsultarNegocio();
+            ViewBag.Pagamentos = _ServicoPagamento.ConsultarNegocio();
+        }
+
+
     }
 }

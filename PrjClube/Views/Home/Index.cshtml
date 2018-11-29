@@ -1,4 +1,7 @@
-﻿@{
+﻿@model IEnumerable<Clube.Modelo.Modelo.Doacao>
+
+
+@{
     ViewBag.Title = "Clube do Bem";
 }
 
@@ -42,55 +45,46 @@
                                 <thead>
                                     <tr role="row">
                                         <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending" style="width: 99px;">Nome</th>
-                                        <th class="sorting_desc" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" aria-sort="descending" style="width: 171px;">Status</th>
                                         <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 71px;">Valor</th>
                                         <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 31px;">Forma</th>
-                                        <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" style="width: 69px;">Date</th>
-                                        <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" style="width: 69px;">Mes</th>
-                                        <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" style="width: 69px;">Ano</th>
+                                        <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" style="width: 69px;">Data</th>
+                                        <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" style="width: 69px;">Parcela</th>
+
 
                                 </thead>
+
                                 <tbody>
-                                    <tr role="row" class="odd">
-                                        <td class="">Mário Fernando</td>
-                                        <td class="sorting_1">Pago</td>
-                                        <td>R$ 10,00</td>
-                                        <td>Dinheiro</td>
-                                        <td>10/06/2018</td>
-                                        <td>Junho</td>
-                                        <td>2018</td>
+                                    @if (Model != null)
+                                    {
+                                        foreach (var item in Model)
+                                        {
+                                            <tr class="even">
 
-                                    </tr>
-                                    <tr role="row" class="even">
-                                        <td class="">Pedro</td>
-                                        <td class="sorting_1">Aberto</td>
-                                        <td>R$ 0,00</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td>Junho</td>
-                                        <td>2018</td>
+                                              
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.nmParticipante)
+                                                </td>
 
-                                    </tr>
-                                    <tr role="row" class="odd">
-                                        <td class="">Dayse</td>
-                                        <td class="sorting_1">Pago</td>
-                                        <td>R$ 10,00</td>
-                                        <td>Bradesco</td>
-                                        <td>12/06/2018</td>
-                                        <td>Junho</td>
-                                        <td>2018</td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Valor)
+                                                </td>
 
-                                    </tr>
-                                    <tr role="row" class="even">
-                                        <td class="">Maria</td>
-                                        <td class="sorting_1">Pago</td>
-                                        <td>R$ 10,00</td>
-                                        <td>Caixa</td>
-                                        <td>10/06/2018</td>
-                                        <td>Junho</td>
-                                        <td>2018</td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.dsTipoPagamento)
+                                                </td>
 
-                                    </tr>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.dtDoacao)
+                                                </td>
+
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.nrParcelas)
+                                                </td>
+
+                                            </tr>
+                                        }
+                                    }
+
                                 </tbody>
                             </table>
                         </div>

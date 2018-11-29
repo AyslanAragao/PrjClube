@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Modelo\Doacao.cs" />
+    <Compile Include="Modelo\TipoPagamento.cs" />
     <Compile Include="Modelo\Participante.cs" />
     <Compile Include="Modelo\Login.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -10,36 +10,36 @@ using System.Threading.Tasks;
 
 namespace Clube.Negocio
 {
-    public class ParticipanteNegocio : Participante, IParticipanteNegocio
+    public class TipoPagamentoNegocio : TipoPagamento, ITipoPagamentoNegocio
     {
-        IParticipanteDados _dados;
+        ITipoPagamento _dados;
 
-        public ParticipanteNegocio()
+        public TipoPagamentoNegocio()
         {
-            _dados = new ParticipanteDados();
+            _dados = new TipoPagamentoDados();
 
         }
-        public void AtualizarNegocio(Participante item)
+        public void AtualizarNegocio(TipoPagamento item)
         {
             throw new NotImplementedException();
         }
 
-        public void CadastrarNegocio(Participante item)
+        public void CadastrarNegocio(TipoPagamento item)
         {
             _dados.CadastrarDados(item);
         }
 
-        public IEnumerable<Participante> ConsultarNegocio()
+        public IEnumerable<TipoPagamento> ConsultarNegocio()
         {
            return _dados.ConsultarDados();
         }
 
-        public Participante ConsultarNegocio(int id)
+        public TipoPagamento ConsultarNegocio(int id)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Participante> ConsultarNegocio(Participante item)
+        public IEnumerable<TipoPagamento> ConsultarNegocio(TipoPagamento item)
         {
             throw new NotImplementedException();
         }
@@ -49,14 +49,6 @@ namespace Clube.Negocio
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Participante> ListarTodos()
-        {
-            return _dados.ListarTodos();
-        }
-
-        public Participante getByID(int id)
-        {
-            return _dados.getByID(id);
-        }
+      
     }
 }

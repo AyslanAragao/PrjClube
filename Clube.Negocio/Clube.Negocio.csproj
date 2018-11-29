@@ -40,8 +40,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interface\IDoacaoNegocio.cs" />
+    <Compile Include="Interface\ITipoPagamentoNegocio.cs" />
     <Compile Include="Interface\IParticipanteNegocio.cs" />
     <Compile Include="Interface\IBaseNegocio.cs" />
+    <Compile Include="DoacaoNegocio.cs" />
+    <Compile Include="TipoPagamentoNegocio.cs" />
     <Compile Include="ParticipanteNegocio.cs" />
     <Compile Include="LoginNegocio.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,0 +1,3 @@
+create procedure sp_consParticipante
+as
+Select cdParticipante, dsApelido from tbParticipante

@@ -1,0 +1,3 @@
+create procedure sp_consTipoPagamento
+as
+Select cdTipoPagamento, dsTipoPagamento from tbtipopagamento
