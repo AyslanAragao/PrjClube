@@ -73,7 +73,19 @@
                                         {
                                             <td>@item.Indicador.nmParticipante</td>
                                         }
-                                        <td><button class="btn btn-info edit" onclick="AbrirModal('#modal','_mdlCadastrar/@item.cdParticipante')">Editar</button></td>
+                                        <td>
+                                            <button id="btnEditar" class="navbar-toggler" onclick="AbrirModal('#modal','_mdlCadastrar/@item.cdParticipante')">
+                                                <span style="font-size:12px;">
+                                                    <i class="glyphicon-edit" aria-hidden="true"></i>
+                                                </span>
+                                            </button>
+
+                                            <button type="button" class="navbar-toggler" name="tipoEnvio" id="tipoEnvio" value="Remover" data-toggle="modal" data-target="#mdlRemover" @(Model.Mercadorias != null ? (Model.Mercadorias.Count == 0 ? "disabled='disabled'" : "") : "disabled='disabled'" )>
+                                                <span style="font-size:12px;">
+                                                    <i class="fa fa-trash" aria-hidden="true"></i> Remover
+                                                </span>
+                                            </button>
+                                        </td>
                                     </tr>
                                 }
                             }
@@ -130,7 +142,29 @@
         </div>
     </section>
 </div>
-    
+
+<div class="modal fade" id="mdlRemover" tabindex="-1" role="dialog" aria-labelledby="LabelRemocao" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="LabelRemocao">Confirmação de Remoção</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center">
+                <label class="label">
+                    Tem certeza que deseja remover o(s) item(ns) selecionados?
+                </label>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" name="tipoEnvio" value="Remover">Sim</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Não</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="modal fade" id="modal">
 
 </div>
