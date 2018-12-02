@@ -4,11 +4,26 @@
         backdrop: 'static'
     });
 };
-function SomenteNumero(e) {
-    var tecla = (window.event) ? event.keyCode : e.which;
-    if ((tecla > 47 && tecla < 58)) return true;
-    else {
-        if (tecla == 8 || tecla == 0) return true;
-        else return false;
+
+function somenteNumeros(num) {
+    var er = /[^0-9.]/;
+    er.lastIndex = 0;
+    var campo = num;
+    if (er.test(campo.value)) {
+        campo.value = "";
     }
 };
+
+function removerParticipante(item,id) {
+    var tbody = document.getElementById("listaParticipantes");
+    //var linha = tbody.getElementsByTagName("tr");
+    var tr = $(item).closest('tr');
+    tr.fadeOut(400, function () { tr.remove(); });
+
+    $.ajax({
+        url: 'RemoverParticipante?id=' + id,
+        cache: false,
+        type: 'GET'
+    });
+    return false;
+}

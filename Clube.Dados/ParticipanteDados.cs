@@ -14,81 +14,66 @@ namespace Clube.Dados
     {
 
         IAcessoDados D;
-        List<Participante> participantes;
+        
         public ParticipanteDados()
         {
 
-            participantes = new List<Participante>();
-            Participante Sidnei = new Participante()
-            {
-                cdLoginCadastro = 1,
-                cdParticipante = 1,
-                cdPartIndicador = 0,
-                dsApelido = "Sidnei Coach",
-                dtCadastro = DateTime.Parse("10/10/2018"),
-                dtEntrada = DateTime.Today,
-                flGeraLogin = false,
-                nmParticipante = "Sidnei",
-                nrDDD = "79",
-                nrTelefone = "888888888",
-                Indicador = null
-            }; participantes.Add(Sidnei);
-            Participante Edenir = new Participante()
-            {
-                cdLoginCadastro = 2,
-                cdParticipante = 2,
-                cdPartIndicador = 0,
-                dsApelido = "Edenir não Coach",
-                dtCadastro = DateTime.Parse("11/10/2018"),
-                dtEntrada = DateTime.Today,
-                flGeraLogin = false,
-                nmParticipante = "Edenir",
-                nrDDD = "80",
-                nrTelefone = "999999999",
-                Indicador = null
-            }; participantes.Add(Edenir);
-
         }
 
-        public void AtualizarDados(Participante item)
+        public void Atualizar(Participante item)
         {
-            var quemIndicou = participantes.Where(m => m.cdParticipante == item.cdPartIndicador).ToList();
-
-            for (int i = 0; i < participantes.Count(); i++)
+            try
             {
-                if (participantes[i].cdParticipante == item.cdParticipante)
-                {
-                    participantes[i] = item;
-                    if (quemIndicou.Count() > 0)
-                    {
-                        participantes[i].cdPartIndicador = quemIndicou[0].cdParticipante;
-                        participantes[i].Indicador = quemIndicou[0];
-                    }
-                }
+                D = new AcessoDados();
+                D.AddParametro("@cdParticipante", SqlDbType.Int, item.cdParticipante);
+                D.AddParametro("@nmParticipante", SqlDbType.VarChar, item.nmParticipante);
+                D.AddParametro("@dsApelido", SqlDbType.VarChar, item.dsApelido);
+                D.AddParametro("@nrDDD", SqlDbType.VarChar, item.nrDDD);
+                D.AddParametro("@nrTelefone", SqlDbType.VarChar, item.nrTelefone);
+                D.AddParametro("@cdPartIndicador", SqlDbType.Int, item.cdPartIndicador);
+                D.ExecProcedure("sp_altParticipante");
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public void Cadastrar(Participante item)
+        {
+            try
+            {
+                D = new AcessoDados();
+                D.AddParametro("@nmParticipante", SqlDbType.VarChar, item.nmParticipante);
+                D.AddParametro("@dsApelido", SqlDbType.VarChar, item.dsApelido);
+                D.AddParametro("@nrDDD", SqlDbType.VarChar, item.nrDDD);
+                D.AddParametro("@nrTelefone", SqlDbType.VarChar, item.nrTelefone);
+                D.AddParametro("@cdPartIndicador", SqlDbType.Int, item.cdPartIndicador);
+
+                D.ExecProcedure("sp_cadParticipante");
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public IEnumerable<Participante> ConsultarTodos()
+        {
+            try
+            {
+                DataTable tabela;
+                D = new AcessoDados();
+                tabela = D.GetDataTable("sp_consParticipante");
+
+                return CarregaDados(tabela);
+            }
+            catch (Exception)
+            {
+                throw;
             }
 
-            throw new NotImplementedException();
-        }
-
-        public void CadastrarDados(Participante item)
-        {
-            D = new AcessoDados();
-            D.AddParametro("@nmParticipante", SqlDbType.VarChar, item.nmParticipante);
-            D.AddParametro("@dsApelido", SqlDbType.VarChar, item.dsApelido);
-            D.AddParametro("@nrDDD", SqlDbType.VarChar, item.nrDDD);
-            D.AddParametro("@nrTelefone", SqlDbType.VarChar, item.nrTelefone);
-
-            D.ExecProcedure("sp_cadParticipante");
-
-        }
-
-        public IEnumerable<Participante> ConsultarDados()
-        {
-            DataTable tabela;
-            D = new AcessoDados();
-            tabela = D.GetDataTable("sp_consParticipante");
-
-            return CarregaDados(tabela);
         }
 
         public IEnumerable<Participante> ConsultarDados(Participante item)
@@ -96,42 +81,74 @@ namespace Clube.Dados
             throw new NotImplementedException();
         }
 
-        public Participante ConsultarDados(int id)
+        public Participante ConsultarPorID(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                D = new AcessoDados();
+                D.AddParametro("@Codigo", SqlDbType.Int, id);
+
+                var tabela = D.GetDataTable("sp_consParticipante");
+
+                return ConverterEmObjeto(tabela.Rows[0]);
+            }
+            catch (Exception)
+            { throw; }
         }
 
-        public void DeletarDados(int id)
+        public void Deletar(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                D = new AcessoDados();
+                D.AddParametro("@cdParticipante", SqlDbType.Int, id);
+                D.ExecProcedure("sp_delParticipante");
+            }
+            catch (Exception)
+            { throw; }
         }
 
-        public IEnumerable<Participante> ListarTodos()
-        {
 
-            return participantes;
-        }
-
-        public Participante getByID(int id)
-        {
-            return participantes.Find(model => model.cdParticipante == id);
-        }
-
-        public IEnumerable<Participante> CarregaDados(DataTable tb)
+        //Funções Internas
+        private IEnumerable<Participante> CarregaDados(DataTable tb)
         {
             foreach (DataRow row in tb.Rows)
             {
-                yield return new Participante
-                {
-                    cdParticipante = Convert.ToInt32((row["cdParticipante"])),
-                    dsApelido = (row["dsApelido"]).ToString(),
-                  
-                };
+                yield return ConverterEmObjeto(row);   
             }
-
         }
+        private Participante ConverterEmObjeto(DataRow row)
+        {
+            try
+            {
+                Participante pp = new Participante();
+                if (!row["cdParticipante"].ToString().Equals(""))
+                    pp.cdParticipante = int.Parse(row["cdParticipante"].ToString());
+                if (!row["nmParticipante"].ToString().Equals(""))
+                    pp.nmParticipante = row["nmParticipante"].ToString();
+                if (!row["dsApelido"].ToString().Equals(""))
+                    pp.dsApelido = row["dsApelido"].ToString();
+                if (!row["nrDDD"].ToString().Equals(""))
+                    pp.nrDDD = row["nrDDD"].ToString();
+                if (!row["nrTelefone"].ToString().Equals(""))
+                    pp.nrTelefone = row["nrTelefone"].ToString();
+                if (!row["cdPartIndicador"].ToString().Equals(""))
+                {
+                    pp.cdPartIndicador = int.Parse(row["cdPartIndicador"].ToString());
+                    pp.Indicador = new Participante();
+                    pp.Indicador.nmParticipante = row["nmIndicador"].ToString();
+                }
+                if (!row["dtEntrada"].ToString().Equals(""))
+                    pp.dtEntrada = DateTime.Parse(row["dtEntrada"].ToString());
+                if (!row["dtCadastro"].ToString().Equals(""))
+                    pp.dtCadastro = DateTime.Parse(row["dtCadastro"].ToString());
+                if (!row["flGeraLogin"].ToString().Equals(""))
+                    pp.flGeraLogin = bool.Parse(row["flGeraLogin"].ToString());
 
-
-
+                return pp;
+            }
+            catch (Exception)
+            { throw; }
+        }
     }
 }

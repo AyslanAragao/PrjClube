@@ -13,7 +13,7 @@ namespace Clube.Dados
         IAcessoDados D;
 
         #region Métodos
-        public T ConsultarDados(int id)
+        public T ConsultarPorID(int id)
         {
             throw new NotImplementedException();
         }
@@ -24,22 +24,22 @@ namespace Clube.Dados
             throw new NotImplementedException();
         }
 
-        public IEnumerable<T> ConsultarDados()
+        public IEnumerable<T> ConsultarTodos()
         {
             throw new NotImplementedException();
         }
 
-        public void AtualizarDados(T item)
+        public void Atualizar(T item)
         {
             throw new NotImplementedException();
         }
 
-        public void DeletarDados(int id)
+        public void Deletar(int id)
         {
             throw new NotImplementedException();
         }
 
-        public void CadastrarDados(T item)
+        public void Cadastrar(T item)
         {
             throw new NotImplementedException();
         }

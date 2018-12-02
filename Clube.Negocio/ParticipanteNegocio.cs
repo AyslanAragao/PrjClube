@@ -12,31 +12,31 @@ namespace Clube.Negocio
 {
     public class ParticipanteNegocio : Participante, IParticipanteNegocio
     {
-        IParticipanteDados _dados;
+        IParticipanteDados _participante;
 
         public ParticipanteNegocio()
         {
-            _dados = new ParticipanteDados();
+            _participante = new ParticipanteDados();
 
         }
-        public void AtualizarNegocio(Participante item)
+        public void Atualizar(Participante item)
         {
-            throw new NotImplementedException();
+            _participante.Atualizar(item);
         }
 
-        public void CadastrarNegocio(Participante item)
+        public void Cadastrar(Participante item)
         {
-            _dados.CadastrarDados(item);
+            _participante.Cadastrar(item);
         }
 
-        public IEnumerable<Participante> ConsultarNegocio()
+        public IEnumerable<Participante> ConsultarTodos()
         {
-           return _dados.ConsultarDados();
+           return _participante.ConsultarTodos();
         }
 
-        public Participante ConsultarNegocio(int id)
+        public Participante ConsultarPorID(int id)
         {
-            throw new NotImplementedException();
+            return _participante.ConsultarPorID(id);
         }
 
         public IEnumerable<Participante> ConsultarNegocio(Participante item)
@@ -44,19 +44,9 @@ namespace Clube.Negocio
             throw new NotImplementedException();
         }
 
-        public void DeletarNegocio(int id)
+        public void Deletar(int id)
         {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Participante> ListarTodos()
-        {
-            return _dados.ListarTodos();
-        }
-
-        public Participante getByID(int id)
-        {
-            return _dados.getByID(id);
+            _participante.Deletar(id);
         }
     }
 }

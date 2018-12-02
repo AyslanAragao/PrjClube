@@ -18,18 +18,18 @@ namespace Clube.Dados
         {
 
         }
-        public void AtualizarDados(TipoPagamento item)
+        public void Atualizar(TipoPagamento item)
         {
             throw new NotImplementedException();
         }
 
-        public void CadastrarDados(TipoPagamento item)
+        public void Cadastrar(TipoPagamento item)
         {
             throw new NotImplementedException();
 
         }
 
-        public IEnumerable<TipoPagamento> ConsultarDados()
+        public IEnumerable<TipoPagamento> ConsultarTodos()
         {
             DataTable tabela;
             D = new AcessoDados();
@@ -43,12 +43,12 @@ namespace Clube.Dados
             throw new NotImplementedException();
         }
 
-        public TipoPagamento ConsultarDados(int id)
+        public TipoPagamento ConsultarPorID(int id)
         {
             throw new NotImplementedException();
         }
 
-        public void DeletarDados(int id)
+        public void Deletar(int id)
         {
             throw new NotImplementedException();
         }

@@ -19,22 +19,22 @@ namespace Clube.Negocio
             _dados = new DoacaoDados();
 
         }
-        public void AtualizarNegocio(Doacao item)
+        public void Atualizar(Doacao item)
         {
             throw new NotImplementedException();
         }
 
-        public void CadastrarNegocio(Doacao item)
+        public void Cadastrar(Doacao item)
         {
-            _dados.CadastrarDados(item);
+            _dados.Cadastrar(item);
         }
 
-        public IEnumerable<Doacao> ConsultarNegocio()
+        public IEnumerable<Doacao> ConsultarTodos()
         {
-           return _dados.ConsultarDados();
+           return _dados.ConsultarTodos();
         }
 
-        public Doacao ConsultarNegocio(int id)
+        public Doacao ConsultarPorID(int id)
         {
             throw new NotImplementedException();
         }
@@ -44,7 +44,7 @@ namespace Clube.Negocio
             throw new NotImplementedException();
         }
 
-        public void DeletarNegocio(int id)
+        public void Deletar(int id)
         {
             throw new NotImplementedException();
         }

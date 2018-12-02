@@ -19,12 +19,12 @@ namespace Clube.Dados
         {
 
         }
-        public void AtualizarDados(Doacao item)
+        public void Atualizar(Doacao item)
         {
             throw new NotImplementedException();
         }
 
-        public void CadastrarDados(Doacao item)
+        public void Cadastrar(Doacao item)
         {
             D = new AcessoDados();
             D.AddParametro("@cdParticipante", SqlDbType.Int, item.cdParticipante);
@@ -36,7 +36,7 @@ namespace Clube.Dados
 
         }
 
-        public IEnumerable<Doacao> ConsultarDados()
+        public IEnumerable<Doacao> ConsultarTodos()
         {
             DataTable tabela;
             D = new AcessoDados();
@@ -50,12 +50,12 @@ namespace Clube.Dados
             throw new NotImplementedException();
         }
 
-        public Doacao ConsultarDados(int id)
+        public Doacao ConsultarPorID(int id)
         {
             throw new NotImplementedException();
         }
 
-        public void DeletarDados(int id)
+        public void Deletar(int id)
         {
             throw new NotImplementedException();
         }

@@ -14,26 +14,17 @@ namespace PrjClube.Controllers
     {
 
 
-        IParticipanteNegocio _negocio;
+        IParticipanteNegocio _participante;
 
         public ParticipanteController()
         {
-            _negocio = new ParticipanteNegocio();
+            _participante = new ParticipanteNegocio();
         }
 
 
         public ActionResult Index()
         {
-            var grid = Session["Grid"] != null ? (List<Participante>)Session["Grid"] : (List<Participante>)_negocio.ListarTodos();
-
-            if (Session["ParticipanteCadastrado"] != null)
-            {
-                var participante = (Participante)Session["ParticipanteCadastrado"];
-                grid.Add(participante);
-            }
-
-            Session["Grid"] = grid;
-            return View(grid);
+           return View(_participante.ConsultarTodos());
         }
 
         public ActionResult _mdlCadastrar(int? id)
@@ -44,7 +35,7 @@ namespace PrjClube.Controllers
                 ViewBag.Title = "Novo Participante";
                 return PartialView(parti);
             }
-            var participante = _negocio.getByID((int)id);
+            var participante = _participante.ConsultarPorID((int)id);
             ViewBag.Title = "Edição de Participante";
             return PartialView(participante);
         }
@@ -53,39 +44,14 @@ namespace PrjClube.Controllers
         {
             try
             {
-                
-                var participantes = (List<Participante>)Session["Grid"];
-                var quemIndicou = participantes.Where(m => m.cdParticipante == part.cdPartIndicador).ToList();
-
                 if (part.cdParticipante > 0)
                 {
-                    for (int i = 0; i < participantes.Count(); i++)
-                    {
-                        if (participantes[i].cdParticipante == part.cdParticipante)
-                        {
-                            participantes[i] = part;
-                            if (quemIndicou.Count() > 0)
-                            {
-                                participantes[i].cdPartIndicador = quemIndicou[0].cdParticipante;
-                                participantes[i].Indicador = quemIndicou[0];
-                            }
-                        }
-                    }
-                    //_negocio.AtualizarNegocio(part);
-                    Session["Grid"] = participantes;
+                    _participante.Atualizar(part);
                     TempData["Mensagem"] = "Participante atualizado com sucesso";
                 }
                 else
                 {
-
-                    if (quemIndicou.Count() > 0)
-                    {
-                        part.cdPartIndicador = quemIndicou[0].cdParticipante;
-                        part.Indicador = quemIndicou[0];
-                    }
-
-                    //_negocio.CadastrarNegocio(item);
-                    Session["ParticipanteCadastrado"] = part;
+                    _participante.Cadastrar(part);
                     TempData["Mensagem"] = "Participante cadastrado com sucesso";
                 }
 
@@ -93,53 +59,21 @@ namespace PrjClube.Controllers
             }
             catch (Exception ex)
             {
-                //Excecao.LogarErrro(ex, 1);
                 TempData["Mensagem"] = ex.Message;
-                return View();
-
-            }
-        }
-
-        public ActionResult Cadastrar()
-        {
-            return View();
-        }
-        [HttpPost]
-        public ActionResult Cadastrar(Participante item)
-        {
-            try
-            {
-                var participantes = (List<Participante>)Session["Grid"];
-
-                var participante = participantes.Where(m => m.cdParticipante == item.cdPartIndicador).ToList();
-
-                item.Indicador = participante[0];
-
-                //_negocio.CadastrarNegocio(item);
-                Session["ParticipanteCadastrado"] = item;
-                TempData["Mensagem"] = "Participante cadastrado com sucesso";
                 return RedirectToAction("Index");
-            }
-            catch (Exception ex)
-            {
-                //Excecao.LogarErrro(ex, 1);
-                TempData["Mensagem"] = ex.Message;
-                return View();
 
             }
         }
 
-
+        public void RemoverParticipante(int id)
+        {
+            _participante.Deletar(id);
+        }
 
         //Funções
         public string ListarParticipantes()
         {
-            var participantes = _negocio.ListarTodos();
-            if (Session["Grid"] != null)
-            {
-                var sessao = (List<Participante>)Session["Grid"];
-                participantes.Concat(sessao);
-            }
+            var participantes = _participante.ConsultarTodos();
             var retorno = JsonConvert.SerializeObject(participantes);
 
             return retorno;

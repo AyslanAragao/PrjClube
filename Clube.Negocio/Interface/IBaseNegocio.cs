@@ -10,14 +10,14 @@ namespace Clube.Negocio.Interface
     {
         IEnumerable<T> ConsultarNegocio(T item);
 
-        IEnumerable<T> ConsultarNegocio();
+        IEnumerable<T> ConsultarTodos();
 
-        T ConsultarNegocio(int id);
+        T ConsultarPorID(int id);
 
-        void AtualizarNegocio(T item);
+        void Atualizar(T item);
 
-        void CadastrarNegocio(T item);
+        void Cadastrar(T item);
 
-        void DeletarNegocio(int id);
+        void Deletar(int id);
     }
 }

@@ -1,141 +1,127 @@
 ﻿@model Clube.Modelo.Modelo.Doacao
 
-    @{
-        ViewBag.Title = "Nova Doação";
-    }
-    <div class="modal-dialog modal-sm" role="document">
-        <div class="modal-content">
-            @using (Html.BeginForm(FormMethod.Post))
-            {
-                @Html.AntiForgeryToken()
+@{
+    ViewBag.Title = "Nova Doação";
+}
+<div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+        @using (Html.BeginForm(FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
 
-                <div class="modal-header">
-                    <h5 class="modal-title" id="titulo">@ViewBag.Title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
+            <div class="modal-header">
+                <h5 class="modal-title" id="titulo">@ViewBag.Title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
 
-                    <div class="container-fluid">
-                        <!-- text input -->
-                        <label for="ddParticipante">Doador: </label>
-                        <div class="form-group">
-                            @*<select id="ddParticipante" class="form-control" name="Participante">
-                                <option value="0">Selecione um Participante</option>
-                                <option value="1">Participante #1</option>
-                                <option value="2">Participante #2</option>
-                                <option value="3">Participante #3</option>
-                            </select>*@
-                            @Html.DropDownListFor(model => model.cdParticipante, new SelectList(ViewBag.Participantes, "cdParticipante", "dsApelido"))
+                <div class="container-fluid">
+                    <!-- text input -->
+                    <label for="ddParticipante">Doador: </label>
+                    <div class="form-group">
+                        @Html.DropDownListFor(model => model.cdParticipante, new SelectList(ViewBag.Participantes, "cdParticipante", "dsApelido"))
+                        <span id="msgParticipante" class="hidden">Quem fez essa doação? Me informe por favor. <i class="em em-slightly_smiling_face"></i></span>
+                    </div>
 
+                    <label for="valor">Valor</label>
+                    <div class=" form-group">
+                        <input type="tel" class="form-control" required="required" maxlength="5" name="Valor" onkeydown="somenteNumeros(this);" onblur="somenteNumeros(this);" autocomplete="off" />
+                        <span id="msgValor" class="hidden">O valor pode ser 1 ou 10000. Voce que decide. <i class="em em-smile"></i></span>
+                    </div>
 
-                            <span id="msgParticipante" class="hidden">Quem fez essa doação? Me informe por favor. <i class="em em-slightly_smiling_face"></i></span>
-                        </div>
+                    <label for="data">Data da Doação</label>
+                    <div class=" form-group">
+                        @Html.TextBoxFor(model => model.dtDoacao, new { @class = "form-control", @name = "dtDoacao", @required = "required", @autocomplete = "off" })
 
-                        <label for="valor">Valor</label>
-                        <div class=" form-group">
-                            <input type="tel" class="form-control" required="required" maxlength="5" name="Valor" onkeydown="SomenteNumero(this)" autocomplete="off" />
-                            <span id="msgValor" class="hidden">O valor pode ser 1 ou 10000. Voce que decide. <i class="em em-smile"></i></span>
-                        </div>
+                        <span id="msgData" class="hidden">Qual foi o dia que essa pessoa entregou a doação? <i class="em em-thinking_face"></i></span>
+                    </div>
 
-                        <label for="data">Data da Doação</label>
-                        <div class=" form-group">
-                            @Html.TextBoxFor(model => model.dtDoacao, new { @class = "form-control", @name = "dtDoacao", @required = "required", @autocomplete = "off" })
-                            
-                            <span id="msgData" class="hidden">Qual foi o dia que essa pessoa entregou a doação? <i class="em em-thinking_face"></i></span>
-                        </div>
+                    <label for="ddPagamento">Forma de Pagamento: </label>
+                    <div class="form-group">                       
+                        @Html.DropDownListFor(model => model.modoPagamento, new SelectList(ViewBag.Pagamentos, "cdTipoPagamento", "dsTipoPagamento"))
+                        <span id="msgPagamento" class="hidden">Ué!? Você não precisa registrar como ele pagou? <i class="em em-laughing"></i></span>
+                    </div>
 
-                        <label for="ddPagamento">Forma de Pagamento: </label>
-                        <div class="form-group">
-                            @*<select id="ddPagamento" class="form-control" name="metodoPagamento">
-                                <option value="0">Selecione uma forma</option>
-                                <option value="1">A vista</option>
-                                <option value="2">Transf. Conta Sidnei</option>
-                                <option value="3">Transf. Conta Edenir</option>
-                            </select>*@
-                            @Html.DropDownListFor(model => model.modoPagamento, new SelectList(ViewBag.Pagamentos, "cdTipoPagamento", "dsTipoPagamento"))
-                            <span id="msgPagamento" class="hidden">Ué!? Você não precisa registrar como ele pagou? <i class="em em-laughing"></i></span>
-                        </div>
-
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                            <button type="submit" class="btn btn-facebook ">
-                                <i class="fa fa-dollar"></i> Registrar
-                            </button>
-                        </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-facebook ">
+                            <i class="fa fa-dollar"></i> Registrar
+                        </button>
                     </div>
                 </div>
-            }
-        </div>
+            </div>
+        }
     </div>
-    <script>
-        (function () {
-            var msg;
-            var barrar = false;
-            $('#cdParticipante').change(function () {
-                msg = $('#dsApelido');
-                valor = $('#cdParticipante');
-                if (valor.val() != 0) {
-                    valor.closest('.form-group').removeClass('has-error');
-                    msg.addClass('hidden').removeClass('text-red');
-                    barrar = false;
-                }
-            });
-            $('input[name="dtDoacao"]')
-                .datepicker({
-                    singleDatePicker: true,
-                    showDropdowns: true,
-                    autoUpdateInput: true
-                });
-
-            $('#modoPagamento').change(function () {
-                msg = $('#dsTipoPagamento');
-                valor = $('#cdTipoPagamento');
-                if (valor.val() != 0) {
-                    valor.closest('.form-group').removeClass('has-error');
-                    msg.addClass('hidden').removeClass('text-red');
-                    barrar = false;
-                }
-            });
-        })(jQuery);
-
-        $('button[type="submit"]').click(function (e) {
-
-            msg = $('#msgParticipante');
-            valor = $('#ddParticipante');
-            if (valor.val() == 0) {
-                valor.closest('.form-group').addClass('has-error');
-                msg.removeClass('hidden').addClass('text-red');
-                barrar = true;
-            } else {
+</div>
+<script>
+    (function () {
+        var msg;
+        var barrar = false;
+        $('#cdParticipante').change(function () {
+            msg = $('#dsApelido');
+            valor = $('#cdParticipante');
+            if (valor.val() != 0) {
+                valor.closest('.form-group').removeClass('has-error');
+                msg.addClass('hidden').removeClass('text-red');
                 barrar = false;
-            }
-
-            msg = $('#msgValor');
-            valor = $('input[name="Valor"]');
-            if (valor.val() == 0 || valor.val() == "") {
-                valor.closest('.form-group').addClass('has-error');
-                msg.removeClass('hidden').addClass('text-red');
-                barrar = true;
-            } else {
-                barrar = false;
-            }
-
-            msg = $('#ddPagamento');
-            valor = $('#ddPagamento');
-            if (valor.val() == 0) {
-                valor.closest('.form-group').addClass('has-error');
-                msg.removeClass('hidden').addClass('text-red');
-                barrar = true;
-            } else {
-                barrar = false;
-            }
-
-            if (barrar) {
-                return false;
             }
         });
+        $('input[name="dtDoacao"]')
+            .datepicker({
+                singleDatePicker: true,
+                showDropdowns: true,
+                autoUpdateInput: true
+            });
 
-       
-    </script>
+        $('#modoPagamento').change(function () {
+            msg = $('#dsTipoPagamento');
+            valor = $('#cdTipoPagamento');
+            if (valor.val() != 0) {
+                valor.closest('.form-group').removeClass('has-error');
+                msg.addClass('hidden').removeClass('text-red');
+                barrar = false;
+            }
+        });
+    })(jQuery);
+
+    $('button[type="submit"]').click(function (e) {
+
+        msg = $('#msgParticipante');
+        valor = $('#ddParticipante');
+        if (valor.val() == 0) {
+            valor.closest('.form-group').addClass('has-error');
+            msg.removeClass('hidden').addClass('text-red');
+            barrar = true;
+        } else {
+            barrar = false;
+        }
+
+        msg = $('#msgValor');
+        valor = $('input[name="Valor"]');
+        if (valor.val() == 0 || valor.val() == "") {
+            valor.closest('.form-group').addClass('has-error');
+            msg.removeClass('hidden').addClass('text-red');
+            barrar = true;
+        } else {
+            barrar = false;
+        }
+
+        msg = $('#ddPagamento');
+        valor = $('#ddPagamento');
+        if (valor.val() == 0) {
+            valor.closest('.form-group').addClass('has-error');
+            msg.removeClass('hidden').addClass('text-red');
+            barrar = true;
+        } else {
+            barrar = false;
+        }
+
+        if (barrar) {
+            return false;
+        }
+    });
+
+
+</script>

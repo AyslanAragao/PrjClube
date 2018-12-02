@@ -8,17 +8,17 @@ namespace Clube.Dados.Interface
 {
     public interface IBase<T> where T : class
     {
-        T ConsultarDados(int id);
+        T ConsultarPorID(int id);
 
         IEnumerable<T> ConsultarDados(T item);
 
-        IEnumerable<T> ConsultarDados();
+        IEnumerable<T> ConsultarTodos();
 
-        void AtualizarDados(T item);
+        void Atualizar(T item);
 
-        void CadastrarDados(T item);
+        void Cadastrar(T item);
 
-        void DeletarDados(int id);
+        void Deletar(int id);
 
        
     }

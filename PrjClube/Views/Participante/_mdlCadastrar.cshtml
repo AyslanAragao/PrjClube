@@ -22,40 +22,33 @@
                     <div class="row">
                         <div class="col-md-6 ">
                             <label>@Html.DisplayNameFor(model => model.nmParticipante)</label>
-                            @*@Html.TextBoxFor(model => model.nmParticipante, new { @class = "form-control", @required = "required" })
-                    @Html.ValidationMessageFor(model => model.nmParticipante)*@
-                            <input type="text" name="nmParticipante" class="form-control" maxlength="30" value="@Model.nmParticipante" required  />
+                            <input type="text" name="nmParticipante" class="form-control" maxlength="30" value="@Model.nmParticipante" required />
                         </div>
                         <div class="col-md-6 ">
                             <label>@Html.DisplayNameFor(model => model.dsApelido)</label>
-                            @*@Html.TextBoxFor(model => model.dsApelido, new { @class = "form-control", @required = "required" })
-                    @Html.ValidationMessageFor(model => model.dsApelido)*@
                             <input type="text" name="dsApelido" class="form-control" maxlength="30" value="@Model.dsApelido" />
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-2">
                             <label>@Html.DisplayNameFor(model => model.nrDDD)</label>
-                            @*@Html.TextBoxFor(model => model.nrDDD, new { @class = "form-control", @required = "required" })
-                    @Html.ValidationMessageFor(model => model.nrDDD)*@
-                            <input type="text" name="nrDDD" class="form-control" maxlength="2" minlength="2" onkeypress='return SomenteNumero(event)' value="@Model.nrDDD" required />
+                            <input type="text" name="nrDDD" class="form-control" maxlength="2" minlength="2" onkeydown="SomenteNumeros(this);" value="@Model.nrDDD" required />
                         </div>
 
                         <div class="col-md-10">
                             <label>@Html.DisplayNameFor(model => model.nrTelefone)</label>
-                            @*@Html.TextBoxFor(model => model.nrTelefone, new { @class = "form-control", @required = "required" })
-                    @Html.ValidationMessageFor(model => model.nrTelefone)*@
-                            <input type="text" name="nrTelefone" class="form-control" maxlength="9" minlength="9" onkeypress='return SomenteNumero(event)' value="@Model.nrTelefone" required />
+                            <input type="text" name="nrTelefone" class="form-control" maxlength="9" minlength="9" onkeydown="SomenteNumeros(this);" value="@Model.nrTelefone" required />
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
                             <label class="text-black">Indicado por: </label>
-                            <select id="ddIndicacao" name="cdPartIndicador" class="form-control"></select>
+                            <select id="ddIndicacao" name="cdPartIndicador" class="form-control select2-dropdown"></select>
                         </div>
                     </div>
                     <div class="row">
                         <input type="hidden" name="cdParticipante" value="@Model.cdParticipante" />
+                        <input type="hidden" id="indicador" value="@Model.cdPartIndicador" />
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -71,10 +64,17 @@
 
 <script>
     $(function () {
+        $(document).ready(function () {
+            //$("#ddIndicacao").select2({
+            //    allowClear: true,
+            //    placeholder: 'Position'
+            //});
+        });
         $('select[name="cdPartIndicador"]').ready(function () {
             var helpers =
             {
                 buildDropdown: function (result, dropdown, emptyMessage) {
+                    let indicador = $('#indicador');
                     // Remove current options
                     dropdown.html('');
                     // Add the empty option with the empty message
@@ -83,7 +83,12 @@
                     if (result != '') {
                         // Loop through each of the results and append the option to the dropdown
                         $.each(result, function (k, v) {
-                            dropdown.append('<option value="' + v.cdParticipante + '">' + v.dsApelido + '</option>');
+                            if (indicador.val() == v.cdParticipante) {
+                                dropdown.append('<option value="' + v.cdParticipante + '" selected>' + v.dsApelido + '</option>');
+                            } else {
+                                dropdown.append('<option value="' + v.cdParticipante + '">' + v.dsApelido + '</option>');
+                            }
+
                         });
                     }
                 }

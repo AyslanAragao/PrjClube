@@ -25,7 +25,7 @@ namespace PrjClube.Controllers
         public ActionResult Index()
         {
             ViewBags();
-            var doacoes = _Servico.ConsultarNegocio();
+            var doacoes = _Servico.ConsultarTodos();
             return View(doacoes);
         }
 
@@ -51,7 +51,7 @@ namespace PrjClube.Controllers
         [HttpPost]
         public ActionResult _mdlNovaDoacao(Doacao doacao)
         {
-            _Servico.CadastrarNegocio(doacao);
+            _Servico.Cadastrar(doacao);
             TempData["Mensagem"] = "Doação cadastrado com sucesso";
             return RedirectToAction("Index");
         }
@@ -59,8 +59,8 @@ namespace PrjClube.Controllers
 
         public void ViewBags()
         {
-            ViewBag.Participantes = _ServicoParticioante.ConsultarNegocio();
-            ViewBag.Pagamentos = _ServicoPagamento.ConsultarNegocio();
+            ViewBag.Participantes = _ServicoParticioante.ConsultarTodos();
+            ViewBag.Pagamentos = _ServicoPagamento.ConsultarTodos();
         }
 
 

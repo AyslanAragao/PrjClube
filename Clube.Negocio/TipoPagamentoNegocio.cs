@@ -19,22 +19,22 @@ namespace Clube.Negocio
             _dados = new TipoPagamentoDados();
 
         }
-        public void AtualizarNegocio(TipoPagamento item)
+        public void Atualizar(TipoPagamento item)
         {
             throw new NotImplementedException();
         }
 
-        public void CadastrarNegocio(TipoPagamento item)
+        public void Cadastrar(TipoPagamento item)
         {
-            _dados.CadastrarDados(item);
+            _dados.Cadastrar(item);
         }
 
-        public IEnumerable<TipoPagamento> ConsultarNegocio()
+        public IEnumerable<TipoPagamento> ConsultarTodos()
         {
-           return _dados.ConsultarDados();
+           return _dados.ConsultarTodos();
         }
 
-        public TipoPagamento ConsultarNegocio(int id)
+        public TipoPagamento ConsultarPorID(int id)
         {
             throw new NotImplementedException();
         }
@@ -44,7 +44,7 @@ namespace Clube.Negocio
             throw new NotImplementedException();
         }
 
-        public void DeletarNegocio(int id)
+        public void Deletar(int id)
         {
             throw new NotImplementedException();
         }
