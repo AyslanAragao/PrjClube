@@ -27,11 +27,9 @@ namespace PrjClube.Controllers
         {
             try
             {
-                //if (_negocio.Logar(login))
-                if (1 == 1)
+                if (_negocio.Logar(login))
+                //if (1 == 1)
                 {
-
-
 
                     return RedirectToAction("Index", "Home");
                 }

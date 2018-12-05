@@ -2,61 +2,54 @@
     <!-- Logo -->
     <a href="#" class="logo" style="text-align:left;">
         <!-- mini logo for sidebar mini 50x50 pixels -->
-        <span class="logo-mini"><img src="~/Content/images/mzl.scnotnyj.png" style="height:50px; width:50px;" /></span>
+        <span class="logo-mini"><img src="~/Content/images/amigosDoBem.png" style="height:50px; width:50px;" /></span>
         <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg"><img src="~/Content/images/mzl.scnotnyj.png" style="height:50px; width:50px;" /> Clube do Bem</span>
+        <span class="logo-lg"><img src="~/Content/images/amigosDoBem.png" style="height:50px; width:50px;" /> Clube do Bem</span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
-    <nav class="navbar navbar-static-top" role="navigation">
+    <nav class="navbar navbar-static-top">
         <!-- Sidebar toggle button-->
-        <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+        <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
             <span class="sr-only">Toggle navigation</span>
         </a>
         <div class="navbar-custom-menu">
 
-            <ul class="nav navbar-nav">
-                <!-- User Account: style can be found in dropdown.less -->
-                <li class="dropdown user user-menu">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <span class="hidden-xs">
-                            @*@if (@Session["Nome"] != null)
-                                {
-                                    @Session["Nome"].ToString();
-                                }*@
-                        </span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <!-- User image -->
-                        <li class="user-header">
-
-                            <img src="" class="img-circle" alt="User Image">
-                            <p>
-
-                            </p>
-                        </li>
-                        <!-- Menu Footer-->
-                        <li class="user-footer">
-
-                            <div class="pull-right">
-
-                                <a href="@Url.Action("Logar", "Login")" class="btn btn-default btn-flat">Logoff</a>
-                            </div>
-                        </li>
-                    </ul>
+            <ul class="nav navbar-nav ml-auto">
+                <li class="nav-item">
+                    <span style="color:#fff"> Sessão expira em: </span>
+                    <span id="defaultCountdown" style="color:#fff"></span>
                 </li>
-                <!-- Control Sidebar Toggle Button -->
-                @*<li>
-                      <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-                    </li>*@
+                <li class="nav-item">
+                    <a class="nav-link"><i class="fa fa-user"></i> Ayslan Aragão</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="modal" data-target="#modalSair" href="#"><i class="fa fa-sign-out"></i> Sair</a>
+                </li>
+
             </ul>
-        </div>
-        <div class="col-lg-9 pull-right" style="text-align:right; vertical-align: middle;">
-
-            <span style="color:#fff"> Sessão expira em: </span>
-            <span id="defaultCountdown" style="color:#fff"></span>
-
         </div>
 
 
     </nav>
 </header>
+
+<!-- Modal -->
+<div class="modal fade" id="modalSair" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Sair da Aplicação</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Tem certeza que deseja sair da aplicação?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">Sim</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
+            </div>
+        </div>
+    </div>
+</div>
