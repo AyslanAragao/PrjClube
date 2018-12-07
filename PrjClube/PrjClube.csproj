@@ -201,6 +201,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\AdminLTE\css\AdminLTE.css" />
     <Content Include="Content\AdminLTE\css\AdminLTE.min.css" />
     <Content Include="Content\AdminLTE\css\alt\AdminLTE-bootstrap-social.min.css" />
     <Content Include="Content\AdminLTE\css\alt\AdminLTE-fullcalendar.min.css" />
@@ -214,6 +215,10 @@
     <Content Include="Content\Componentes\bootstrap-datepicker\js\bootstrap-datepicker.min.js" />
     <Content Include="Content\Componentes\bootstrap-daterangepicker\daterangepicker.css" />
     <Content Include="Content\Componentes\bootstrap-daterangepicker\daterangepicker.js" />
+    <Content Include="Content\Componentes\bootstrap4\css\bootstrap.css" />
+    <Content Include="Content\Componentes\bootstrap4\css\bootstrap.min.css" />
+    <Content Include="Content\Componentes\bootstrap4\js\bootstrap.bundle.js" />
+    <Content Include="Content\Componentes\bootstrap4\js\bootstrap.bundle.min.js" />
     <Content Include="Content\Componentes\bootstrap\css\bootstrap.min.css" />
     <Content Include="Content\Componentes\bootstrap\js\bootstrap.min.js" />
     <Content Include="Content\Componentes\datatables.net-bs\css\dataTables.bootstrap.min.css" />
@@ -238,7 +243,6 @@
     <Content Include="Content\plugins\input-mask\jquery.inputmask.regex.extensions.js" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -279,6 +283,7 @@
     <Content Include="Views\Participante\Cadastrar.cshtml" />
     <Content Include="Views\Participante\_mdlCadastrar.cshtml" />
     <Content Include="Views\Home\_mdlNovaDoacao.cshtml" />
+    <Content Include="Views\Shared\_Topo_Template - Copy.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

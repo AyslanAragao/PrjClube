@@ -10,10 +10,10 @@
             @Html.AntiForgeryToken()
 
             <div class="modal-header">
-                <h5 class="modal-title" id="titulo">@ViewBag.Title</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
+                <h4 class="modal-title" id="titulo">@ViewBag.Title</h4>
             </div>
             <div class="modal-body">
 
@@ -32,18 +32,18 @@
                     <div class="row">
                         <div class="col-md-2">
                             <label>@Html.DisplayNameFor(model => model.nrDDD)</label>
-                            <input type="text" name="nrDDD" class="form-control" maxlength="2" minlength="2" onkeydown="SomenteNumeros(this);" value="@Model.nrDDD" required />
+                            <input type="text" name="nrDDD" class="form-control" maxlength="2" minlength="2" data-inputmask='"mask": "99"' data-mask value="@Model.nrDDD" required />
                         </div>
 
                         <div class="col-md-10">
                             <label>@Html.DisplayNameFor(model => model.nrTelefone)</label>
-                            <input type="text" name="nrTelefone" class="form-control" maxlength="9" minlength="9" onkeydown="SomenteNumeros(this);" value="@Model.nrTelefone" required />
+                            <input type="text" name="nrTelefone" class="form-control" maxlength="9" minlength="9" data-inputmask='"mask": "999999999"' data-mask  value="@Model.nrTelefone" required />
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
                             <label class="text-black">Indicado por: </label>
-                            <select id="ddIndicacao" name="cdPartIndicador" class="form-control select2-dropdown"></select>
+                            <select id="ddIndicacao" name="cdPartIndicador" class="form-control"></select>
                         </div>
                     </div>
                     <div class="row">
@@ -51,12 +51,12 @@
                         <input type="hidden" id="indicador" value="@Model.cdPartIndicador" />
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-facebook ">
-                        <i class="fa fa-save"></i> Gravar
-                    </button>
-                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btn-facebook ">
+                    <i class="fa fa-save"></i> Gravar
+                </button>
             </div>
         }
     </div>
@@ -70,6 +70,7 @@
             //    placeholder: 'Position'
             //});
         });
+        $('[data-mask]').inputmask();
         $('select[name="cdPartIndicador"]').ready(function () {
             var helpers =
             {
