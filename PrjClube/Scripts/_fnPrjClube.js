@@ -14,7 +14,7 @@ function somenteNumeros(num) {
     }
 };
 
-function removerParticipante(item,id) {
+function removerParticipante(item, id) {
     var tbody = document.getElementById("listaParticipantes");
     //var linha = tbody.getElementsByTagName("tr");
     var tr = $(item).closest('tr');
@@ -27,3 +27,44 @@ function removerParticipante(item,id) {
     });
     return false;
 }
+
+/***********Eventos sem chamadas***********/
+$('select[id="ddmodoPagamento"]').ready(function () {
+    var helpers =
+    {
+        buildDropdown: function (result, dropdown, emptyMessage) {
+            //Remove current options
+            dropdown.html('');
+            //Add the empty option with the empty message
+            dropdown.append('<option value="0">' + emptyMessage + '</option>');
+            // Check result isnt empty
+            if (result != '') {
+                // Loop through each of the results and append the option to the dropdown
+                $.each(result, function (k, v) {
+                    dropdown.append('<option value="' + v.cdTipoPagamento + '">' + v.dsTipoPagamento + '</option>');
+                });
+            }
+        }
+    }
+
+    $.ajax({
+        type: "GET",
+        url: '../Funcoes/GetModoPagamentos',
+        success: function (data) {
+            helpers.buildDropdown(
+                jQuery.parseJSON(data),
+                $('#ddmodoPagamento'),
+                'Selecione um Pagamento'
+            );
+        },
+        cache: false
+    });
+    return false;
+});
+
+$('.dataTable').dataTable({
+    "dom": 'rtp',
+    "language": {
+        "url":"../Content/Componentes/datatables.net/plugins/Portuguese-Brasil.json"
+    }
+})

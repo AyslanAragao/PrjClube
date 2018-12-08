@@ -188,6 +188,7 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\FuncoesController.cs" />
     <Compile Include="Controllers\ParticipanteController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -220,8 +221,12 @@
     <Content Include="Content\Componentes\bootstrap4\css\bootstrap.min.css" />
     <Content Include="Content\Componentes\bootstrap4\js\bootstrap.bundle.js" />
     <Content Include="Content\Componentes\bootstrap4\js\bootstrap.bundle.min.js" />
+    <Content Include="Content\Componentes\bootstrap\css\bootstrap-dialog.css" />
+    <Content Include="Content\Componentes\bootstrap\css\bootstrap-dialog.min.css" />
     <Content Include="Content\Componentes\bootstrap\css\bootstrap.css" />
     <Content Include="Content\Componentes\bootstrap\css\bootstrap.min.css" />
+    <Content Include="Content\Componentes\bootstrap\js\bootstrap-dialog.js" />
+    <Content Include="Content\Componentes\bootstrap\js\bootstrap-dialog.min.js" />
     <Content Include="Content\Componentes\bootstrap\js\bootstrap.min.js" />
     <Content Include="Content\Componentes\datatables.net-bs\css\dataTables.bootstrap.min.css" />
     <Content Include="Content\Componentes\datatables.net-bs\js\dataTables.bootstrap.min.js" />
@@ -231,6 +236,7 @@
     <Content Include="Content\Componentes\font-awesome\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\Componentes\jquery-slimscroll\jquery.slimscroll.min.js" />
     <Content Include="Content\Componentes\jquery\jquery.min.js" />
+    <Content Include="Content\Componentes\moment\min\moment-with-locales.min.js" />
     <Content Include="Content\Componentes\moment\min\moment.min.js" />
     <Content Include="Content\Componentes\select2\css\select2.min.css" />
     <Content Include="Content\Componentes\select2\js\select2.full.min.js" />
@@ -255,6 +261,7 @@
     <Content Include="Content\Componentes\font-awesome\fonts\fontawesome-webfont.woff" />
     <Content Include="Content\Componentes\font-awesome\fonts\fontawesome-webfont.woff2" />
     <Content Include="Content\Componentes\font-awesome\fonts\FontAwesome.otf" />
+    <None Include="Content\Componentes\datatables.net\plugins\Portuguese-Brasil.json" />
     <None Include="Properties\PublishProfiles\appclube - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\appclube - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\Local.pubxml" />
@@ -296,6 +303,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Funcoes\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

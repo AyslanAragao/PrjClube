@@ -13,19 +13,27 @@ namespace PrjClube.Controllers
     {
         IParticipanteNegocio _ServicoParticioante;
         ITipoPagamentoNegocio _ServicoPagamento;
-        IDoacaoNegocio _Servico;
+        IDoacaoNegocio _ServicoDoacao;
 
         public HomeController()
         {
             _ServicoParticioante = new ParticipanteNegocio();
             _ServicoPagamento = new TipoPagamentoNegocio();
-            _Servico = new DoacaoNegocio();
+            _ServicoDoacao = new DoacaoNegocio();
 
         }
         public ActionResult Index()
         {
-            ViewBags();
-            var doacoes = _Servico.ConsultarTodos();
+            var doacoes = _ServicoDoacao.ConsultarTodos();
+            return View(doacoes);
+        }
+        [HttpPost]
+        public ActionResult Index(Doacao doacao)
+        {
+            if (!doacao.periodoDtDoacao.Equals("") && !doacao.periodoDtDoacao.Contains("-"))
+                doacao.periodoDtDoacao += " - " + doacao.periodoDtDoacao;
+
+            var doacoes = _ServicoDoacao.ConsultarNegocio(doacao);
             return View(doacoes);
         }
 
@@ -51,7 +59,7 @@ namespace PrjClube.Controllers
         [HttpPost]
         public ActionResult _mdlNovaDoacao(Doacao doacao)
         {
-            _Servico.Cadastrar(doacao);
+            _ServicoDoacao.Cadastrar(doacao);
             TempData["Mensagem"] = "Doação cadastrado com sucesso";
             return RedirectToAction("Index");
         }

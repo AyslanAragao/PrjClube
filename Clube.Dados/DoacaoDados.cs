@@ -47,7 +47,17 @@ namespace Clube.Dados
 
         public IEnumerable<Doacao> ConsultarDados(Doacao item)
         {
-            throw new NotImplementedException();
+            var datas = item.periodoDtDoacao.Split('-');
+
+            DataTable tabela;
+            D = new AcessoDados();
+            D.AddParametro("@nmParticipante", SqlDbType.Int, item.nmParticipante);
+            D.AddParametro("@modoPagamento", SqlDbType.Int, item.modoPagamento);
+            D.AddParametro("@dtDoacaoDE", SqlDbType.SmallDateTime, datas[0]);
+            D.AddParametro("@dtDoacaoATE", SqlDbType.SmallDateTime, datas[1]);
+            tabela = D.GetDataTable("sp_consDoacao");
+
+            return CarregaDados(tabela);
         }
 
         public Doacao ConsultarPorID(int id)

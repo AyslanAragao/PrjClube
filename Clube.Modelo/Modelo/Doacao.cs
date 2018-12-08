@@ -11,6 +11,7 @@ namespace Clube.Modelo.Modelo
         public int cdParticipante { get; set; }
         public double Valor { get; set; }
         public DateTime dtDoacao { get; set; }
+        public string periodoDtDoacao { get; set; }
         public int modoPagamento { get; set; }
 
 

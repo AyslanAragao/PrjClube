@@ -41,7 +41,7 @@ namespace Clube.Negocio
 
         public IEnumerable<Doacao> ConsultarNegocio(Doacao item)
         {
-            throw new NotImplementedException();
+            return _dados.ConsultarDados(item);
         }
 
         public void Deletar(int id)
