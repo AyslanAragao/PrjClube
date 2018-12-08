@@ -207,6 +207,7 @@
     <Content Include="Content\AdminLTE\css\alt\AdminLTE-fullcalendar.min.css" />
     <Content Include="Content\AdminLTE\css\alt\AdminLTE-select2.min.css" />
     <Content Include="Content\AdminLTE\css\alt\AdminLTE-without-plugins.min.css" />
+    <Content Include="Content\AdminLTE\css\skins\skin-green.css" />
     <Content Include="Content\AdminLTE\css\skins\skin-green.min.css" />
     <Content Include="Content\AdminLTE\img\icons.png" />
     <Content Include="Content\AdminLTE\js\adminlte.js" />
@@ -219,6 +220,7 @@
     <Content Include="Content\Componentes\bootstrap4\css\bootstrap.min.css" />
     <Content Include="Content\Componentes\bootstrap4\js\bootstrap.bundle.js" />
     <Content Include="Content\Componentes\bootstrap4\js\bootstrap.bundle.min.js" />
+    <Content Include="Content\Componentes\bootstrap\css\bootstrap.css" />
     <Content Include="Content\Componentes\bootstrap\css\bootstrap.min.css" />
     <Content Include="Content\Componentes\bootstrap\js\bootstrap.min.js" />
     <Content Include="Content\Componentes\datatables.net-bs\css\dataTables.bootstrap.min.css" />
@@ -226,6 +228,7 @@
     <Content Include="Content\Componentes\datatables.net\js\jquery.dataTables.min.js" />
     <Content Include="Content\Componentes\fastclick\lib\fastclick.js" />
     <Content Include="Content\Componentes\font-awesome\css\font-awesome.min.css" />
+    <Content Include="Content\Componentes\font-awesome\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\Componentes\jquery-slimscroll\jquery.slimscroll.min.js" />
     <Content Include="Content\Componentes\jquery\jquery.min.js" />
     <Content Include="Content\Componentes\moment\min\moment.min.js" />
@@ -241,11 +244,17 @@
     <Content Include="Content\plugins\input-mask\jquery.inputmask.numeric.extensions.js" />
     <Content Include="Content\plugins\input-mask\jquery.inputmask.phone.extensions.js" />
     <Content Include="Content\plugins\input-mask\jquery.inputmask.regex.extensions.js" />
+    <Content Include="Content\_cssPrjClube.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Componentes\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\Componentes\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\Componentes\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\Componentes\font-awesome\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\Componentes\font-awesome\fonts\FontAwesome.otf" />
     <None Include="Properties\PublishProfiles\appclube - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\appclube - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\Local.pubxml" />

@@ -10,10 +10,10 @@
             @Html.AntiForgeryToken()
 
             <div class="modal-header">
-                <h5 class="modal-title" id="titulo">@ViewBag.Title</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
+                <h5 class="modal-title" id="titulo">@ViewBag.Title</h5>
             </div>
             <div class="modal-body">
 
@@ -21,25 +21,24 @@
                     <!-- text input -->
                     <label for="ddParticipante">Doador: </label>
                     <div class="form-group">
-                        @Html.DropDownListFor(model => model.cdParticipante, new SelectList(ViewBag.Participantes, "cdParticipante", "dsApelido"),new { @class = "form-control", @required = "required" })
+                        @Html.DropDownListFor(model => model.cdParticipante, new SelectList(ViewBag.Participantes, "cdParticipante", "dsApelido"), new { @class = "form-control", @required = "required" })
                         <span id="msgParticipante" class="hidden">Quem fez essa doação? Me informe por favor. <i class="em em-slightly_smiling_face"></i></span>
                     </div>
 
                     <label for="valor">Valor</label>
                     <div class=" form-group">
-                        <input type="tel" class="form-control" required="required" maxlength="5" name="Valor" onkeydown="somenteNumeros(this);" onblur="somenteNumeros(this);" autocomplete="off" />
+                        <input type="tel" class="form-control" required="required" maxlength="5" name="Valor" data-mask data-inputmask='"mask": "99[9]"' autocomplete="off" />
                         <span id="msgValor" class="hidden">O valor pode ser 1 ou 10000. Voce que decide. <i class="em em-smile"></i></span>
                     </div>
 
                     <label for="data">Data da Doação</label>
                     <div class=" form-group">
                         @Html.TextBoxFor(model => model.dtDoacao, new { @class = "form-control", @name = "dtDoacao", @required = "required", @autocomplete = "off" })
-
                         <span id="msgData" class="hidden">Qual foi o dia que essa pessoa entregou a doação? <i class="em em-thinking_face"></i></span>
                     </div>
 
                     <label for="ddPagamento">Forma de Pagamento: </label>
-                    <div class="form-group">                       
+                    <div class="form-group">
                         @Html.DropDownListFor(model => model.modoPagamento, new SelectList(ViewBag.Pagamentos, "cdTipoPagamento", "dsTipoPagamento"), new { @class = "form-control", @required = "required" })
                         <span id="msgPagamento" class="hidden">Ué!? Você não precisa registrar como ele pagou? <i class="em em-laughing"></i></span>
                     </div>
@@ -70,9 +69,8 @@
         });
         $('input[name="dtDoacao"]')
             .datepicker({
-                singleDatePicker: true,
-                showDropdowns: true,
-                autoUpdateInput: true
+                language: 'pt-BR',
+                autoclose: true
             });
 
         $('#modoPagamento').change(function () {
@@ -85,6 +83,8 @@
             }
         });
     })(jQuery);
+
+    $('[data-mask]').inputmask();
 
     $('button[type="submit"]').click(function (e) {
 
