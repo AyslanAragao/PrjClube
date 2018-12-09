@@ -24,7 +24,20 @@ namespace PrjClube.Controllers
 
         public ActionResult Index()
         {
-           return View(_participante.ConsultarTodos());
+            return View(_participante.ConsultarTodos());
+        }
+        [HttpPost]
+        public ActionResult Index(Participante participante)
+        {
+            TempData["cdParticipante"] = participante.cdParticipante;
+            TempData["nmParticipante"] = participante.nmParticipante;
+            TempData["nrDDD"] = participante.nrDDD;
+            TempData["nrTelefone"] = participante.nrTelefone;
+            TempData["periodoDtCadastro"] = participante.periodoDtCadastro;
+            TempData["periodoDtEntrada"] = participante.periodoDtEntrada;
+            TempData["cdPartIndicador"] = participante.cdPartIndicador;
+
+            return View(_participante.ConsultarNegocio(participante));
         }
 
         public ActionResult _mdlCadastrar(int? id)

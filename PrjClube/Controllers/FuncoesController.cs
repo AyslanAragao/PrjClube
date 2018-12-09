@@ -8,9 +8,11 @@ namespace PrjClube.Controllers
     public class FuncoesController : Controller
     {
         private readonly ITipoPagamentoNegocio _tipoPagamento;
+        private readonly IParticipanteNegocio _participante;
         public FuncoesController()
         {
             _tipoPagamento = new TipoPagamentoNegocio();
+            _participante = new ParticipanteNegocio();
         }
         // GET: Funcoes
         public ActionResult Index()
@@ -21,6 +23,14 @@ namespace PrjClube.Controllers
         public string GetModoPagamentos()
         {
             var tp = _tipoPagamento.ConsultarTodos();
+            string retorno = JsonConvert.SerializeObject(tp);
+
+            return retorno;
+        }
+
+        public string GetParticipantes()
+        {
+            var tp = _participante.ConsultarTodos();
             string retorno = JsonConvert.SerializeObject(tp);
 
             return retorno;

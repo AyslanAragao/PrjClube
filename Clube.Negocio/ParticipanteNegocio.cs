@@ -41,7 +41,19 @@ namespace Clube.Negocio
 
         public IEnumerable<Participante> ConsultarNegocio(Participante item)
         {
-            throw new NotImplementedException();
+            if (!string.IsNullOrEmpty(item.periodoDtCadastro) && !item.periodoDtCadastro.Contains("-"))
+                item.periodoDtCadastro  += " - " + item.periodoDtCadastro;
+
+            if (string.IsNullOrEmpty(item.periodoDtCadastro))
+                item.periodoDtCadastro = " - ";
+
+            if (!string.IsNullOrEmpty(item.periodoDtEntrada) && !item.periodoDtEntrada.Contains("-"))
+                item.periodoDtEntrada += " - " + item.periodoDtEntrada;
+
+            if (string.IsNullOrEmpty(item.periodoDtEntrada))
+                item.periodoDtEntrada = " - ";
+
+            return _participante.ConsultarDados(item);
         }
 
         public void Deletar(int id)

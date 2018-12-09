@@ -31,7 +31,7 @@ namespace Clube.Negocio
 
         public IEnumerable<Doacao> ConsultarTodos()
         {
-           return _dados.ConsultarTodos();
+            return _dados.ConsultarTodos();
         }
 
         public Doacao ConsultarPorID(int id)
@@ -41,6 +41,12 @@ namespace Clube.Negocio
 
         public IEnumerable<Doacao> ConsultarNegocio(Doacao item)
         {
+            if (!string.IsNullOrEmpty(item.periodoDtDoacao) && !item.periodoDtDoacao.Contains("-"))
+                item.periodoDtDoacao += " - " + item.periodoDtDoacao;
+
+            if (string.IsNullOrEmpty(item.periodoDtDoacao))
+                item.periodoDtDoacao = " - ";
+
             return _dados.ConsultarDados(item);
         }
 
@@ -49,6 +55,6 @@ namespace Clube.Negocio
             throw new NotImplementedException();
         }
 
-      
+        
     }
 }

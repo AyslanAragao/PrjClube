@@ -29,7 +29,7 @@ namespace Clube.Dados
             D = new AcessoDados();
             D.AddParametro("@cdParticipante", SqlDbType.Int, item.cdParticipante);
             D.AddParametro("@vlDoacao", SqlDbType.Float, item.Valor);
-            D.AddParametro("@metodoPagamento", SqlDbType.Int, item.modoPagamento);
+            D.AddParametro("@metodoPagamento", SqlDbType.Int, item.cdTipoPagamento);
             D.AddParametro("@dtDoaca", SqlDbType.SmallDateTime, item.dtDoacao);
 
             D.ExecProcedure("sp_cadDoacao");
@@ -52,9 +52,9 @@ namespace Clube.Dados
             DataTable tabela;
             D = new AcessoDados();
             D.AddParametro("@nmParticipante", SqlDbType.Int, item.nmParticipante);
-            D.AddParametro("@modoPagamento", SqlDbType.Int, item.modoPagamento);
-            D.AddParametro("@dtDoacaoDE", SqlDbType.SmallDateTime, datas[0]);
-            D.AddParametro("@dtDoacaoATE", SqlDbType.SmallDateTime, datas[1]);
+            D.AddParametro("@modoPagamento", SqlDbType.Int, item.cdTipoPagamento);
+            D.AddParametro("@dtDoacaoDE", SqlDbType.VarChar, datas[0]);
+            D.AddParametro("@dtDoacaoATE", SqlDbType.VarChar, datas[1]);
             tabela = D.GetDataTable("sp_consDoacao");
 
             return CarregaDados(tabela);
@@ -70,28 +70,47 @@ namespace Clube.Dados
             throw new NotImplementedException();
         }
 
-    
-
-      
         public IEnumerable<Doacao> CarregaDados(DataTable tb)
         {
             foreach (DataRow row in tb.Rows)
             {
-                yield return new Doacao
-                {
-                    
-                    nmParticipante = (row["Nome"]).ToString(),
-                    Valor = Convert.ToDouble    ((row["Valor"])),
-                    dsTipoPagamento = (row["Forma"]).ToString(),
-                    dtDoacao = Convert.ToDateTime((row["Data"])),
-                    nrParcelas = Convert.ToInt32((row["Parcelas"])),
-
-                };
+                yield return ConverterEmObjeto(row);
             }
-
         }
 
 
+        private Doacao ConverterEmObjeto(DataRow row)
+        {
+            try
+            {
+                Doacao pp = new Doacao();
 
+                if (!row["cdParticipante"].ToString().Equals(""))
+                    pp.cdParticipante = int.Parse(row["cdParticipante"].ToString());
+                if (!row["nmParticipante"].ToString().Equals(""))
+                    pp.nmParticipante = row["nmParticipante"].ToString();
+                if (!row["vlLancamento"].ToString().Equals(""))
+                    pp.Valor = double.Parse(row["vlLancamento"].ToString());
+                if (!row["dtPagamento"].ToString().Equals(""))
+                    pp.dtDoacao = DateTime.Parse(row["dtPagamento"].ToString());
+                if (!row["cdTipoPagamento"].ToString().Equals(""))
+                    pp.cdTipoPagamento = int.Parse(row["cdTipoPagamento"].ToString());
+                if (!row["dstipopagamento"].ToString().Equals(""))
+                    pp.dsTipoPagamento = row["dstipopagamento"].ToString();
+                if (!row["Parcelas"].ToString().Equals(""))
+                    pp.nrParcelas = int.Parse(row["Parcelas"].ToString());
+                //Parcelas caso tenha
+                //if (!row["cdLancamentoParcelado"].ToString().Equals(""))
+                //    pp.parcelas.cdLancamentoParcelado = int.Parse(row["cdLancamentoParcelado"].ToString());
+                //if (!row["vlParcela"].ToString().Equals(""))
+                //    pp.parcelas.vlParcela = double.Parse(row["vlParcela"].ToString());
+                //if (!row["dtMesParcela"].ToString().Equals(""))
+                //    pp.parcelas.dtMesParcela = DateTime.Parse(row["dtMesParcela"].ToString());
+
+                return pp;
+            }
+            catch (Exception)
+            { throw; }
+        }
     }
 }

@@ -6,31 +6,69 @@
 
 
 <div class="content-wrapper">
-    <section class="content-header">
-        <div class="col-lg-4"><h3>Membros</h3></div>
-        <div class="col-lg-1 pull-right">
-            <button class="btn btn-info edit" onclick="AbrirModal('#modal','_mdlCadastrar')">Novo Participante</button>
-        </div>
-        @using (Html.BeginForm())
-        {
-            @Html.AntiForgeryToken()
-            <div class="col-lg-2">
-
-            </div>
-
-            <div class="col-lg-4">
-            </div>
-        }
-    </section>
     <section class="content">
+        <form method="post">
+            <section class="box box-success">
+                <section class="box-header with-border">
+                    <h3 class="box-title "> Filtros de Busca </h3>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                    </div>
+                </section>
+                <section class="box-body">
+                    <div class="row">
+                        <div class="form-group col-lg-2">
+                            <label class="titulo-input">Nº Participante</label>
+                            <input type="number" tabindex="1" autofocus class="form-control form-control-sm" maxlength="3" name="cdParticipante" placeholder="Nº do participante" autocomplete="off" value="@(TempData["cdParticipante"] != null && int.Parse(TempData["cdParticipante"].ToString()) == 0 ? "" : TempData["cdParticipante"]  )" />
+                        </div>
+                        <div class="form-group col-lg-4">
+                            <label class="titulo-input">Nome ou Apelido</label>
+                            <input type="text" tabindex="2" class="form-control form-control-sm" maxlength="50" name="nmParticipante" placeholder="Informe o nome ou o apelido de um participante" value="@TempData["nmParticipante"]" />
+                        </div>
+                        <div class="form-group col-lg-3">
+                            <label class="titulo-input">Dt. Cadastro</label>
+                            <input id="DtCadastro" tabindex="3" name="periodoDtCadastro" type="text" class="form-control form-control-sm daterange" placeholder="dd/mm/aaaa" autocomplete=off value="@TempData["periodoDtCadastro"]" />
+                        </div>
+                        <div class="form-group col-lg-3">
+                            <label class="titulo-input">Dt. Entrada</label>
+                            <input id="DtEntrada" tabindex="4" name="periodoDtEntrada" type="text" class="form-control form-control-sm daterange2" placeholder="dd/mm/aaaa" autocomplete=off value="@TempData["periodoDtEntrada"]" />
+                        </div>
+                        <div class="form-group col-lg-2">
+                            <label>@Html.DisplayNameFor(model => model.nrTelefone)</label>
+                            <input type="text" tabindex="5" name="nrTelefone" class="form-control" maxlength="9" minlength="9" data-inputmask='"mask": "999999999"' data-mask value="@TempData["nrTelefone"]" />
+                        </div>
 
+                        <div class="form-group col-lg-4">
+                            <label for="ddIndicador">Indicador: </label>
+                            <select id="ddIndicador" tabindex="6" name="cdPartIndicador" class="form-control form-control-sm select2"></select>
+                            <input id="hdIndicador" type="hidden" value="@TempData["cdPartIndicador"]" />
+                        </div>
+                    </div>
+                </section>
+                <section class="box-footer">
+                    <div class="box-tools pull-right">
+                        <button type="button" tabindex="7" class="btn btn-sm btn-secondary" onclick="javascript: window.location.assign('Index')">Limpar</button>
+                        <button type="submit" tabindex="8" class="btn btn-sm btn-primary">Buscar</button>
+                    </div>
+                </section>
+            </section>
+        </form>
 
-        <div class="row">
-            <div class="col-md-12">
-
-                <div class="col-sm-12">
-
-                    <table id="listaParticipantes" class="table table-striped table-bordered tabela" style="width:100%">
+        <section class="box box-success">
+            <section class="box-header with-border">
+                <h3 class="box-title ">Membros<small class="text-sm"> Visão Geral</small></h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-sm btn-no-bg" onclick="AbrirModal('#modal','_mdlCadastrar')">
+                        <span>
+                            <i class="fa fa-user" aria-hidden="true"></i> Nova Participante
+                        </span>
+                    </button>
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                </div>
+            </section>
+            <section class="box-body">
+                <div class="card-body text-sm">
+                    <table id="listaParticipantes" class="table table-striped table-bordered table-condensed dataTable " role="grid" aria-describedby="datatable_info">
                         <thead>
                             <tr>
                                 <th>@Html.DisplayNameFor(m => m.cdParticipante)</th>
@@ -72,32 +110,27 @@
                                             <td>@item.Indicador.nmParticipante</td>
                                         }
                                         <td>
-                                            <button id="btnEditar" class="navbar-toggler" onclick="AbrirModal('#modal','_mdlCadastrar/@item.cdParticipante')">
-                                                <span style="font-size:12px;">
-                                                    <i class="glyphicon-edit" aria-hidden="true"></i>
+                                            <button id="btnEditar" type="button" class="btn btn-box-tool" onclick="AbrirModal('#modal','_mdlCadastrar/@item.cdParticipante')">
+                                                <span>
+                                                    <i class="fa fa-edit" aria-hidden="true"></i>
                                                 </span>
                                             </button>
 
-                                            <button type="button" class="navbar-toggler" onclick="removerParticipante(this,@item.cdParticipante)">
-                                                <span style="font-size:12px;">
-                                                    <i class="fa fa-trash" aria-hidden="true"></i> Remover
+                                            <button type="button" class="btn btn-box-tool" onclick="removerParticipante(this,@item.cdParticipante)">
+                                                <span>
+                                                    <i class="fa fa-trash" aria-hidden="true"></i> 
                                                 </span>
                                             </button>
                                         </td>
                                     </tr>
                                 }
                             }
-                            else
-                            {
-                                <tr>
-                                    <td class="text-center" colspan="7">Sem nenhum participante ate o momento</td>
-                                </tr>
-                            }
                         </tbody>
                     </table>
                 </div>
-            </div>
-        </div>
+            </section>
+            <section class="box-footer"></section>
+        </section>
     </section>
 </div>
 

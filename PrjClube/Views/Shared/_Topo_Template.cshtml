@@ -15,12 +15,20 @@
         <div class="navbar-custom-menu">
 
             <ul class="nav navbar-nav ml-auto">
+                @*<li class="nav-item">
+                        <span class="nav-link"> Sessão expira em: </span>
+                        <span id="defaultCountdown" class="nav-link small"></span>
+                    </li>*@
                 <li class="nav-item">
-                    <span style="color:#fff"> Sessão expira em: </span>
-                    <span id="defaultCountdown" style="color:#fff"></span>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link"><i class="fa fa-user"></i> Ayslan Aragão</a>
+                    <a class="nav-link m-0 p-0">
+                        <div class="text-center">
+                            <i class="fa fa-user"></i>
+                            <span>Ayslan Aragão</span>
+                            <br />
+                            <span class="text-sm"> Sessão expira em: </span>
+                            <span id="defaultCountdown" class="text-sm"></span>
+                        </div>
+                    </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="modal" data-target="#modalSair" href="#"><i class="fa fa-sign-out"></i> Sair</a>

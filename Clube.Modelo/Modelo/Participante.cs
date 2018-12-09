@@ -26,6 +26,9 @@ namespace Clube.Modelo.Modelo
         [DisplayName("GeraLogin")]
         public bool flGeraLogin { set; get; }
 
+        public string periodoDtEntrada { get; set; }
+        public string periodoDtCadastro { get; set; }
+
         public virtual Participante Indicador { get; set; }
     }
 }

@@ -4,7 +4,7 @@
     ViewBag.Title = "Nova Doação";
 }
 <div class="modal-dialog modal-sm" role="document">
-    <div class="modal-content">
+    <div class="modal-content ">
         @using (Html.BeginForm(FormMethod.Post))
         {
             @Html.AntiForgeryToken()
@@ -19,33 +19,34 @@
 
                 <div class="container-fluid">
                     <!-- text input -->
-                    <label for="ddParticipante">Doador: </label>
+
                     <div class="form-group">
-                        @Html.DropDownListFor(model => model.cdParticipante, new SelectList(ViewBag.Participantes, "cdParticipante", "dsApelido"), new { @class = "form-control", @required = "required" })
+                        <label for="ddParticipante">Doador: </label>
+                        @Html.DropDownListFor(model => model.cdParticipante, new SelectList(ViewBag.Participantes, "cdParticipante", "dsApelido"), new { @class = "form-control select2", @required = "required" })
                         <span id="msgParticipante" class="hidden">Quem fez essa doação? Me informe por favor. <i class="em em-slightly_smiling_face"></i></span>
                     </div>
 
-                    <label for="valor">Valor</label>
                     <div class=" form-group">
-                        <input type="tel" class="form-control" required="required" maxlength="5" name="Valor" data-mask data-inputmask='"mask": "99[9]"' autocomplete="off" />
-                        <span id="msgValor" class="hidden">O valor pode ser 1 ou 10000. Voce que decide. <i class="em em-smile"></i></span>
+                        <label for="valor">Valor</label>
+                        <input type="tel" class="form-control" maxlength="5" required="required" name="Valor" data-mask data-inputmask='"mask": "99[9]"' autocomplete="off" />
+                        <span id="msgValor" class="hidden text-sm">O valor pode ser 10,20,30 ou 990. Voce que decide.</span><i id="emoji" class=" hidden em em-smile"></i>
                     </div>
 
-                    <label for="data">Data da Doação</label>
                     <div class=" form-group">
-                        @Html.TextBoxFor(model => model.dtDoacao, new { @class = "form-control", @name = "dtDoacao", @required = "required", @autocomplete = "off" })
+                        <label for="data">Data da Doação</label>
+                        @Html.TextBoxFor(model => model.dtDoacao, new { @class = "form-control datepicker", @name = "dtDoacao", @required = "required", @autocomplete = "off" })
                         <span id="msgData" class="hidden">Qual foi o dia que essa pessoa entregou a doação? <i class="em em-thinking_face"></i></span>
                     </div>
 
-                    <label for="ddPagamento">Forma de Pagamento: </label>
                     <div class="form-group">
-                        @Html.DropDownListFor(model => model.modoPagamento, new SelectList(ViewBag.Pagamentos, "cdTipoPagamento", "dsTipoPagamento"), new { @class = "form-control", @required = "required" })
+                        <label for="ddPagamento">Forma de Pagamento: </label>
+                        @Html.DropDownListFor(model => model.cdTipoPagamento, new SelectList(ViewBag.Pagamentos, "cdTipoPagamento", "dsTipoPagamento"), new { @class = "form-control select2", @required = "required" })
                         <span id="msgPagamento" class="hidden">Ué!? Você não precisa registrar como ele pagou? <i class="em em-laughing"></i></span>
                     </div>
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-facebook ">
+                        <button id="btnSubmit" type="submit" class="btn btn-primary ">
                             <i class="fa fa-dollar"></i> Registrar
                         </button>
                     </div>
@@ -55,73 +56,79 @@
     </div>
 </div>
 <script>
-    (function () {
+
+    $(document).ready(function () {
+        $('.select2').select2({
+            containerCssClass: 'form-control rounded'
+            ,width: "100%"
+        });
         var msg;
         var barrar = false;
-        $('#cdParticipante').change(function () {
-            msg = $('#dsApelido');
-            valor = $('#cdParticipante');
-            if (valor.val() != 0) {
-                valor.closest('.form-group').removeClass('has-error');
-                msg.addClass('hidden').removeClass('text-red');
-                barrar = false;
+        moment.locale('pt-br');
+        $('[data-mask]').inputmask();
+        $('.datepicker').daterangepicker({
+            singleDatePicker: true
+        });
+
+
+
+
+        $('input[name="Valor"]').change(function () {
+            let msg = $('#msgValor');
+            let valor = $('input[name="Valor"]');
+            let emoji = $('#emoji');
+            let tamanho = valor.val().replace('_', '').length;
+            let ultimoDigito = valor.val().substr(tamanho - 1, 1);
+
+
+            valor.closest('.form-group').removeClass('has-error');
+            msg.addClass('hidden').removeClass('text-red');
+            emoji.addClass('hidden')
+            barrar = false;
+
+
+            //if (tamanho > 2) {
+            //    valor.closest('.form-group').removeClass('has-error');
+            //    msg.addClass('hidden').removeClass('text-red');
+            //    emoji.addClass('hidden')
+            //    barrar = false;
+            //}
+            //if (ultimoDigito == 0) {
+            //    valor.closest('.form-group').removeClass('has-error');
+            //    msg.addClass('hidden').removeClass('text-red');
+            //    emoji.addClass('hidden')
+            //    barrar = false;
+            //}
+
+        });
+
+        $('#btnSubmit').click(function (e) {
+            barrar = false;
+
+            let emoji = $('#emoji');
+            let msg = $('#msgValor');
+            let valor = $('input[name="Valor"]');
+            let tamanho = valor.val().replace('_', '').length;
+            let ultimoDigito = valor.val().substr(tamanho - 1, 1);
+
+            if (tamanho < 2) {
+                valor.closest('.form-group').addClass('has-error');
+                msg.removeClass('hidden').addClass('text-red');
+                msg.html("O valor minimo da doação são R$10");
+                emoji.removeClass('hidden')
+                barrar = true;
+            } else if (ultimoDigito != 0) {
+                valor.closest('.form-group').addClass('has-error');
+                msg.removeClass('hidden').addClass('text-red');
+                msg.html("Psiu! As doações são multiplo de 10. Acho que você esqueceu de algo. <i class='em em - laughing'></i>");
+                emoji.removeClass('hidden')
+                barrar = true;
+            }
+
+            if (barrar) {
+                e.preventDefault();
             }
         });
-        $('input[name="dtDoacao"]')
-            .datepicker({
-                language: 'pt-BR',
-                autoclose: true
-            });
-
-        $('#modoPagamento').change(function () {
-            msg = $('#dsTipoPagamento');
-            valor = $('#cdTipoPagamento');
-            if (valor.val() != 0) {
-                valor.closest('.form-group').removeClass('has-error');
-                msg.addClass('hidden').removeClass('text-red');
-                barrar = false;
-            }
-        });
-    })(jQuery);
-
-    $('[data-mask]').inputmask();
-
-    $('button[type="submit"]').click(function (e) {
-
-        msg = $('#msgParticipante');
-        valor = $('#ddParticipante');
-        if (valor.val() == 0) {
-            valor.closest('.form-group').addClass('has-error');
-            msg.removeClass('hidden').addClass('text-red');
-            barrar = true;
-        } else {
-            barrar = false;
-        }
-
-        msg = $('#msgValor');
-        valor = $('input[name="Valor"]');
-        if (valor.val() == 0 || valor.val() == "") {
-            valor.closest('.form-group').addClass('has-error');
-            msg.removeClass('hidden').addClass('text-red');
-            barrar = true;
-        } else {
-            barrar = false;
-        }
-
-        msg = $('#ddPagamento');
-        valor = $('#ddPagamento');
-        if (valor.val() == 0) {
-            valor.closest('.form-group').addClass('has-error');
-            msg.removeClass('hidden').addClass('text-red');
-            barrar = true;
-        } else {
-            barrar = false;
-        }
-
-        if (barrar) {
-            return false;
-        }
     });
-
 
 </script>

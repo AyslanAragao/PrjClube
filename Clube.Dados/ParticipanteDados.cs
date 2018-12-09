@@ -14,7 +14,7 @@ namespace Clube.Dados
     {
 
         IAcessoDados D;
-        
+
         public ParticipanteDados()
         {
 
@@ -78,7 +78,24 @@ namespace Clube.Dados
 
         public IEnumerable<Participante> ConsultarDados(Participante item)
         {
-            throw new NotImplementedException();
+            var cadastros = item.periodoDtCadastro.Split('-');
+            var entradas = item.periodoDtEntrada.Split('-');
+
+            DataTable tabela;
+            D = new AcessoDados();
+            D.AddParametro("@cdParticipante", SqlDbType.Int, item.cdParticipante);
+            D.AddParametro("@nmParticipante", SqlDbType.VarChar, item.nmParticipante);
+            D.AddParametro("@dsApelido", SqlDbType.VarChar, item.dsApelido);
+            D.AddParametro("@nrDDD", SqlDbType.VarChar, item.nrDDD);
+            D.AddParametro("@nrTelefone", SqlDbType.VarChar, item.nrTelefone);
+            D.AddParametro("@DtCadastroDE", SqlDbType.VarChar, cadastros[0]);
+            D.AddParametro("@DtCadastroATE", SqlDbType.VarChar, cadastros[1]);
+            D.AddParametro("@DtEntradaDE", SqlDbType.VarChar, entradas[0]);
+            D.AddParametro("@DtEntradaATE", SqlDbType.VarChar, entradas[1]);
+            D.AddParametro("@cdPartIndicador", SqlDbType.VarChar, item.cdPartIndicador);
+            tabela = D.GetDataTable("sp_consParticipante");
+
+            return CarregaDados(tabela);
         }
 
         public Participante ConsultarPorID(int id)
@@ -86,7 +103,7 @@ namespace Clube.Dados
             try
             {
                 D = new AcessoDados();
-                D.AddParametro("@Codigo", SqlDbType.Int, id);
+                D.AddParametro("@cdParticipante", SqlDbType.Int, id);
 
                 var tabela = D.GetDataTable("sp_consParticipante");
 
@@ -114,7 +131,7 @@ namespace Clube.Dados
         {
             foreach (DataRow row in tb.Rows)
             {
-                yield return ConverterEmObjeto(row);   
+                yield return ConverterEmObjeto(row);
             }
         }
         private Participante ConverterEmObjeto(DataRow row)

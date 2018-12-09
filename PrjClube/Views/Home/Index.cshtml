@@ -16,11 +16,7 @@
                 <section class="box-header with-border">
                     <h3 class="box-title "> Filtros de Busca </h3>
                     <div class="box-tools pull-right">
-                        <button class="btn btn-sm btn-no-bg" onclick="AbrirModal('#modal','_mdlNovaDoacao')">
-                            <span>
-                                <i class="fa fa-dollar" aria-hidden="true"></i> Nova Doação
-                            </span>
-                        </button>
+                       
                         <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                     </div>
                 </section>
@@ -28,20 +24,22 @@
                     <div class="row">
                         <div class="form-group col-lg-4">
                             <label class="titulo-input">Nome</label>
-                            <input type="text" class="form-control form-control-sm" maxlength="50" name="nmParticipante" placeholder="Informe o nome de um amigo" autocomplete="off" />
+                            <input type="text" class="form-control form-control-sm" maxlength="50" name="nmParticipante" placeholder="Informe o nome de um amigo" autocomplete="off" value="@TempData["nmParticipante"]" />
                         </div>
                         <div class="form-group col-lg-4">
                             <label class="titulo-input">Modo de Pagamento</label>
-                            <select id="ddmodoPagamento" name="modoPagamento" class="form-control form-control-sm "></select>
+                            <select id="ddmodoPagamento" name="modoPagamento" class="form-control form-control-sm"></select>
+                            <input id="hdmodoPagamento" type="hidden" value="@TempData["modoPagamento"]" />
                         </div>
                         <div class="form-group col-lg-4">
                             <label class="titulo-input">Dt. Doação</label>
-                            <input id="dtDoacao" name="periodoDtDoacao" type="text" class="form-control form-control-sm daterange" placeholder="dd/mm/aaaa" autocomplete=off />
+                            <input id="dtDoacao" name="periodoDtDoacao" type="text" class="form-control form-control-sm daterange" placeholder="dd/mm/aaaa" autocomplete=off value="@TempData["periodoDtDoacao"]" />
                         </div>
                     </div>
                 </section>
                 <section class="box-footer">
                     <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-sm btn-secondary" onclick="javascript: window.location.assign('Index')">Limpar</button>
                         <button type="submit" class="btn btn-sm btn-primary">Buscar</button>
                     </div>
                 </section>
@@ -52,14 +50,20 @@
             <section class="box-header with-border">
                 <h3 class="box-title "> Planilha Financeira<small class="text-sm"> Visão Geral</small></h3>
                 <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-sm btn-no-bg" onclick="AbrirModal('#modal','_mdlNovaDoacao')">
+                        <span>
+                            <i class="fa fa-dollar" aria-hidden="true"></i> Nova Doação
+                        </span>
+                    </button>
                     <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                 </div>
             </section>
             <section class="box-body">
                 <div class="card-body">
-                    <table id="datatable" class="table table-striped table-bordered dataTable " role="grid" aria-describedby="datatable_info">
+                    <table id="tbDoacoes" class="table table-striped table-bordered table-condensed dataTable " role="grid" aria-describedby="datatable_info">
                         <thead>
                             <tr>
+                                <th></th>
                                 <th>Nome</th>
                                 <th>Valor</th>
                                 <th>Forma</th>
@@ -72,6 +76,9 @@
                                 foreach (var item in Model)
                                 {
                                     <tr class="even">
+                                        <td class="details-control">
+                                            @* coluna para o for da filha *@
+                                        </td>
                                         <td>
                                             @Html.DisplayFor(modelItem => item.nmParticipante)
                                         </td>
@@ -99,14 +106,54 @@
     </section>
 </div>
 
-<div class="modal fade" id="modal">
+<div class="modal fade " id="modal">
 
 </div>
 <script>
-    moment.locale('pt-br');
-    $('.daterange').daterangepicker({
-        autoUpdateInput: false
-    }, function (dataInicio, dataFim) {
-        $('.daterange').val(dataInicio.format("DD/MM/YYYY") + ' - ' + dataFim.format('DD/MM/YYYY'));
+
+    /* Formatting function for row details - modify as you need */
+    function format(d) {
+        // `d` is the original data object for the row
+        return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">' +
+            '<tr>' +
+            '<td>Full name:</td>' +
+            '<td>' + d.nmParticipante + '</td>' +
+            '</tr>' +
+            '<tr>' +
+            '<td>Extension number:</td>' +
+            '<td>' + d.nrParcelas + '</td>' +
+            '</tr>' +
+            '<tr>' +
+            '<td>Extra info:</td>' +
+            '<td>And any further details here (images etc)...</td>' +
+            '</tr>' +
+            '</table>';
+    }
+
+    //$(document).ready(function () {
+    //    var table = $('.dataTable').dataTable({
+    //        "dom": 'rt <"text-sm" p>',
+    //        "language": {
+    //            "url": "../Content/Componentes/datatables.net/plugins/Portuguese-Brasil.json"
+    //        }
+    //    });
+        // Add event listener for opening and closing details
+        $('#tbDoacoes tbody').on('click', 'td.details-control', function () {
+            var tr = $(this).closest('tr');
+
+            var row = table.row(tr);
+
+            if (row.child.isShown()) {
+                // This row is already open - close it
+                row.child.hide();
+                tr.removeClass('shown');
+            }
+            else {
+                // Open this row
+                row.child(format(row.data())).show();
+                tr.addClass('shown');
+            }
+        });
+
     });
 </script>

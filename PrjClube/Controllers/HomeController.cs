@@ -30,9 +30,10 @@ namespace PrjClube.Controllers
         [HttpPost]
         public ActionResult Index(Doacao doacao)
         {
-            if (!doacao.periodoDtDoacao.Equals("") && !doacao.periodoDtDoacao.Contains("-"))
-                doacao.periodoDtDoacao += " - " + doacao.periodoDtDoacao;
-
+            TempData["nmParticipante"] = doacao.nmParticipante;
+            TempData["modoPagamento"] = doacao.cdTipoPagamento;
+            TempData["periodoDtDoacao"] = doacao.periodoDtDoacao;
+            
             var doacoes = _ServicoDoacao.ConsultarNegocio(doacao);
             return View(doacoes);
         }
