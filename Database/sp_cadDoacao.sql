@@ -7,7 +7,7 @@ alter procedure sp_cadDoacao
 )
 as
 declare 
-@cont int = 1,
+@cont int = 0,
 @parcela int,
 @maxdata smalldatetime,
 @cdlancamento int
