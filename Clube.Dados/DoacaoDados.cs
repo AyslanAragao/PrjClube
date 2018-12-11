@@ -47,14 +47,24 @@ namespace Clube.Dados
 
         public IEnumerable<Doacao> ConsultarDados(Doacao item)
         {
+            DateTime? data1 = null;
+            DateTime? data2 = null;
             var datas = item.periodoDtDoacao.Split('-');
+
+            if (!String.IsNullOrEmpty(datas[0].ToString().Trim()))
+                data1 = Convert.ToDateTime(datas[0]);
+
+            if (!String.IsNullOrEmpty(datas[1].ToString().Trim()))
+                data2 = Convert.ToDateTime(datas[1]);
+
+
 
             DataTable tabela;
             D = new AcessoDados();
-            D.AddParametro("@nmParticipante", SqlDbType.Int, item.nmParticipante);
+            D.AddParametro("@nmParticipante", SqlDbType.VarChar, item.nmParticipante);
             D.AddParametro("@modoPagamento", SqlDbType.Int, item.cdTipoPagamento);
-            D.AddParametro("@dtDoacaoDE", SqlDbType.VarChar, datas[0]);
-            D.AddParametro("@dtDoacaoATE", SqlDbType.VarChar, datas[1]);
+            D.AddParametro("@dtDoacaoDE", SqlDbType.SmallDateTime, data1);
+            D.AddParametro("@dtDoacaoATE", SqlDbType.SmallDateTime, data2);
             tabela = D.GetDataTable("sp_consDoacao");
 
             return CarregaDados(tabela);

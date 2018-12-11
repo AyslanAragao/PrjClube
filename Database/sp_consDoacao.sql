@@ -1,8 +1,8 @@
 ALTER procedure sp_consDoacao
 @nmParticipante varchar(100) = '',
 @modoPagamento int = 0,
-@dtDoacaoDE smalldatetime = '',
-@dtDoacaoATE smalldatetime = ''
+@dtDoacaoDE smalldatetime = null,
+@dtDoacaoATE smalldatetime = null
 as
 	select 
 	l.cdParticipante,
@@ -21,8 +21,10 @@ as
 				  join tbTipoPagamento tl on l.cdTipoPagamento = tl.cdTipoPagamento
 				  --left join tbLancamentoParcelado lp on l.cdLancamento = lp.cdLancamento
 WHERE
-('' = @nmParticipante or nmParticipante = @nmParticipante)
+('' = @nmParticipante or nmParticipante like '%' + @nmParticipante + '%')
 and(0 = @modoPagamento or tl.cdTipoPagamento = @modoPagamento)
-and (('' = @dtDoacaoDE or '' = @dtDoacaoATE)
-	 or
-	 dtPagamento BETWEEN @dtDoacaoDE and @dtDoacaoATE)
+and (
+	
+	(@dtDoacaoDE is null or @dtDoacaoATE is null) or (dtPagamento BETWEEN @dtDoacaoDE and @dtDoacaoATE)
+	
+	)
