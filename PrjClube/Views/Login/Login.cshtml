@@ -9,18 +9,19 @@
 <!-- Tell the browser to be responsive to screen width -->
 <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 <!-- Bootstrap 3.3.5 -->
-<link rel="stylesheet" href="~/Content/designer/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="~/Content/Componentes/bootstrap/css/bootstrap.min.css">
 
 <!-- Theme style -->
-<link rel="stylesheet" href="~/Content/designer/dist/css/AdminLTE.min.css">
+<link rel="stylesheet" href="~/Content/AdminLTE/css/AdminLTE.min.css">
 <!-- iCheck -->
-<link rel="stylesheet" href="~/Content/designer/plugins/iCheck/square/blue.css">
-<script src="~/Content/designer/plugins/jQuery/jQuery-2.1.4.min.js"></script>
-<script src="~/Content/js/jquery.mask.min.js"></script>
-<script src="~/Content/js/jquery-3.3.1.js.js"></script>
+<link rel="stylesheet" href="~/Content/Componentes/iCheck/all.css">
+<script src="~/Content/Componentes/jquery/jquery.min.js"></script>
+<script src="~/Content/Componentes/input-mask/jquery.inputmask.js"></script>
+<script src="~/Content/Componentes/input-mask/jquery.inputmask.phone.extensions.js"></script>
+<script src="~/Content/Componentes/jquery/jquery.min.js"></script>
 
 
-<script type="text/javascript">$("#nmLogin").mask("(00) 0000-00009");</script>
+<script type="text/javascript">$('[data-mask]').inputmask();</script>
 
 @if (null != TempData["Mensagem"])
 {
