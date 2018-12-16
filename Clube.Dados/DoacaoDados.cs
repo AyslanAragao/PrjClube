@@ -95,6 +95,8 @@ namespace Clube.Dados
             {
                 Doacao pp = new Doacao();
 
+                if (!row["cdLancamento"].ToString().Equals(""))
+                    pp.cdLancamento = int.Parse(row["cdLancamento"].ToString());
                 if (!row["cdParticipante"].ToString().Equals(""))
                     pp.cdParticipante = int.Parse(row["cdParticipante"].ToString());
                 if (!row["nmParticipante"].ToString().Equals(""))

@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace Clube.Modelo.Modelo
 {
-    public class Doacao
+    public class Doacao 
     {
+        public int cdLancamento { get; set; }
         public int cdParticipante { get; set; }
         public string nmParticipante { get; set; }
         public double Valor { get; set; }
@@ -17,6 +18,6 @@ namespace Clube.Modelo.Modelo
         public string dsTipoPagamento { get; set; }
         public int nrParcelas { get; set; }
 
-        public virtual DoacaoParcela parcelas { get; set; }
+        public virtual List<DoacaoParcela> parcelas { get; set; }
     }
 }

@@ -43,8 +43,10 @@
   <ItemGroup>
     <Compile Include="AcessoDados.cs" />
     <Compile Include="Base.cs" />
+    <Compile Include="DoacaoParcelaDados.cs" />
     <Compile Include="Interface\IAcessoDados.cs" />
     <Compile Include="Interface\IDoacaoDados.cs" />
+    <Compile Include="Interface\IDoacaoParcelaDados.cs" />
     <Compile Include="Interface\ITipoPagamentoDados.cs" />
     <Compile Include="Interface\IParticipanteDados.cs" />
     <Compile Include="Interface\IBase.cs" />

@@ -13,10 +13,12 @@ namespace Clube.Negocio
     public class DoacaoNegocio : Doacao, IDoacaoNegocio
     {
         IDoacaoDados _dados;
+        IDoacaoParcelaDados _doacaoParcela;
 
         public DoacaoNegocio()
         {
             _dados = new DoacaoDados();
+            _doacaoParcela = new DoacaoParcelaDados();
 
         }
         public void Atualizar(Doacao item)
@@ -31,7 +33,20 @@ namespace Clube.Negocio
 
         public IEnumerable<Doacao> ConsultarTodos()
         {
-            return _dados.ConsultarTodos();
+            var doacoes = _dados.ConsultarTodos();
+
+            for (int i = 0; i < doacoes.Count(); i++)
+            {
+                if (doacoes.ToList()[i].nrParcelas > 1)
+                {
+                    DoacaoParcela dp = new DoacaoParcela();
+                    dp.cdLancamento = doacoes.ToList()[i].cdLancamento;
+                    var parcela = _doacaoParcela.ConsultarDados(dp);
+                    doacoes.ToList()[i].parcelas = parcela.ToList();
+
+                }
+            }
+            return doacoes;
         }
 
         public Doacao ConsultarPorID(int id)
@@ -55,6 +70,5 @@ namespace Clube.Negocio
             throw new NotImplementedException();
         }
 
-        
     }
 }

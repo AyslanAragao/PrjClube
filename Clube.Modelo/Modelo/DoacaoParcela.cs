@@ -12,5 +12,6 @@ namespace Clube.Modelo.Modelo
         public int cdLancamentoParcelado { get; set; }
         public double vlParcela { get; set; }
         public DateTime dtMesParcela { get; set; }
+        public string PeriododtMesParcela { get; set; }
     }
 }

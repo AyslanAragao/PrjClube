@@ -5,6 +5,7 @@ ALTER procedure sp_consDoacao
 @dtDoacaoATE smalldatetime = null
 as
 	select 
+	l.cdLancamento,
 	l.cdParticipante,
 	nmParticipante,
 	vlLancamento,

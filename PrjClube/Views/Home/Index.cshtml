@@ -8,6 +8,8 @@
 <script src="~/Content/Componentes/moment/min/moment.min.js"></script>
 <script src="~/Content/Componentes/moment/min/moment-with-locales.min.js"></script>
 <script src="~/Content/Componentes/bootstrap-daterangepicker/daterangepicker.js"></script>
+<script src="~/Content/Componentes/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="~/Content/Componentes/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 
 <div class="content-wrapper">
     <section class="content">
@@ -16,7 +18,7 @@
                 <section class="box-header with-border">
                     <h3 class="box-title "> Filtros de Busca </h3>
                     <div class="box-tools pull-right">
-                       
+
                         <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                     </div>
                 </section>
@@ -60,7 +62,7 @@
             </section>
             <section class="box-body">
                 <div class="card-body">
-                    <table id="tbDoacoes" class="table table-striped table-bordered table-condensed dataTable " role="grid" aria-describedby="datatable_info">
+                    <table id="tbDoacoes" class="table table-striped table-bordered table-condensed " role="grid" aria-describedby="datatable_info">
                         <thead>
                             <tr>
                                 <th></th>
@@ -92,7 +94,7 @@
                                             @item.dtDoacao.ToShortDateString()
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.nrParcelas)
+                                           @item.nrParcelas
                                         </td>
                                     </tr>
                                 }
@@ -117,11 +119,11 @@
         return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">' +
             '<tr>' +
             '<td>Full name:</td>' +
-            '<td>' + d.nmParticipante + '</td>' +
+            '<td>' + d + '</td>' +
             '</tr>' +
             '<tr>' +
             '<td>Extension number:</td>' +
-            '<td>' + d.nrParcelas + '</td>' +
+            '<td>' + d.Parcela + '</td>' +
             '</tr>' +
             '<tr>' +
             '<td>Extra info:</td>' +
@@ -130,17 +132,16 @@
             '</table>';
     }
 
-    //$(document).ready(function () {
-    //    var table = $('.dataTable').dataTable({
-    //        "dom": 'rt <"text-sm" p>',
-    //        "language": {
-    //            "url": "../Content/Componentes/datatables.net/plugins/Portuguese-Brasil.json"
-    //        }
-    //    });
+    $(document).ready(function () {
+        var table = $('#tbDoacoes').DataTable({
+            "dom": 'rt <"text-sm" p>',
+            "language": {
+                "url": "../Content/Componentes/datatables.net/plugins/Portuguese-Brasil.json"
+            }
+        });
         // Add event listener for opening and closing details
         $('#tbDoacoes tbody').on('click', 'td.details-control', function () {
-            var tr = $(this).closest('tr');
-
+            var tr = $(this).closest('tr');            
             var row = table.row(tr);
 
             if (row.child.isShown()) {
