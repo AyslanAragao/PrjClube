@@ -1,6 +1,7 @@
 ﻿using Clube.Modelo.Modelo;
 using Clube.Negocio;
 using Clube.Negocio.Interface;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -70,6 +71,14 @@ namespace PrjClube.Controllers
         {
             ViewBag.Participantes = _ServicoParticioante.ConsultarTodos();
             ViewBag.Pagamentos = _ServicoPagamento.ConsultarTodos();
+        }
+
+
+        public string ConsultarParcelasDoacoes(int id)
+        {
+            var doacoes = _ServicoDoacao.ConsultarTodasParcelasPorID(id);
+            string retorno = JsonConvert.SerializeObject(doacoes);
+            return retorno;
         }
 
 

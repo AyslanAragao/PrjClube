@@ -79,6 +79,7 @@
                                 {
                                     <tr class="even">
                                         <td class="details-control">
+                                            @Html.HiddenFor(m => item.cdLancamento)
                                             @* coluna para o for da filha *@
                                         </td>
                                         <td>
@@ -94,7 +95,7 @@
                                             @item.dtDoacao.ToShortDateString()
                                         </td>
                                         <td>
-                                           @item.nrParcelas
+                                            @item.nrParcelas
                                         </td>
                                     </tr>
                                 }
@@ -113,23 +114,61 @@
 </div>
 <script>
 
+    function formatarSubTabela(d) {
+
+        var dados = "";
+        for (var i = 0; i < d.length; i++) {
+            var data = new Date(d[i]["dtMesParcela"]);
+            dados +=
+
+                '<tr>' +
+                '<td></td>' +
+                '<td></td>' +
+                '<td>' + d[i]["cdLancamentoParcelado"] + '</td>' +
+                '<td>' + d[i]["vlParcela"] + '</td>' +
+                '<td>' + data.toLocaleDateString() + '</td>' +
+                '</tr>'
+        }
+
+        if (dados.length <= 0)
+            return "<h6> Não existe parcelas para essa doação</h6>";
+            else
+            return '<table cellpadding="5" cellspacing="0" border="0" class="table table-striped table-hover table-condensed">' +
+                '<thead>' +
+                '<tr>' +
+                '<th></th>' +
+                '<th></th>' +
+                '<th>Nº Parcela</th > ' +
+                '<th>Valor Parcela</th > ' +
+                '<th>Mês da Parcela</th > ' +
+                '</tr>' +
+                '</thead>' +
+                '<tbody>' +
+                dados
+                '</tbody>' +
+                '</table>';
+
+    }
+
     /* Formatting function for row details - modify as you need */
-    function format(d) {
-        // `d` is the original data object for the row
-        return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">' +
-            '<tr>' +
-            '<td>Full name:</td>' +
-            '<td>' + d + '</td>' +
-            '</tr>' +
-            '<tr>' +
-            '<td>Extension number:</td>' +
-            '<td>' + d.Parcela + '</td>' +
-            '</tr>' +
-            '<tr>' +
-            '<td>Extra info:</td>' +
-            '<td>And any further details here (images etc)...</td>' +
-            '</tr>' +
-            '</table>';
+    function format(rowData) {
+
+        var div = $('<div/>')
+            .addClass('loading')
+            .text('Loading...');
+
+        $.ajax({
+            url: 'ConsultarParcelasDoacoes/',
+            data: {
+                id: $(rowData[0]).val()
+            },
+            dataType: 'json',
+            success: function (json) {
+                div.html(formatarSubTabela(json))
+                    .removeClass('loading');
+            }
+        });
+        return div;
     }
 
     $(document).ready(function () {
@@ -141,7 +180,7 @@
         });
         // Add event listener for opening and closing details
         $('#tbDoacoes tbody').on('click', 'td.details-control', function () {
-            var tr = $(this).closest('tr');            
+            var tr = $(this).closest('tr');
             var row = table.row(tr);
 
             if (row.child.isShown()) {

@@ -70,5 +70,10 @@ namespace Clube.Negocio
             throw new NotImplementedException();
         }
 
+        public IEnumerable<DoacaoParcela> ConsultarTodasParcelasPorID(int id)
+        {
+            return _doacaoParcela.ConsultarTodasParcelasPorID(id);
+        }
+
     }
 }

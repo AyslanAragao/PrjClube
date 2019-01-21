@@ -9,6 +9,6 @@ namespace Clube.Negocio.Interface
 {
     public interface IDoacaoNegocio : IBaseNegocio<Doacao>
     {
-       
+        IEnumerable<DoacaoParcela> ConsultarTodasParcelasPorID(int id);
     }
 }

@@ -9,5 +9,6 @@ namespace Clube.Dados.Interface
 {
     public interface IDoacaoParcelaDados : IBase<DoacaoParcela>
     {
+        IEnumerable<DoacaoParcela> ConsultarTodasParcelasPorID(int id);
     }
 }

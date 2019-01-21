@@ -12,7 +12,7 @@ alter procedure sp_consParticipante
 @DtEntradaATE smalldatetime = '',
 @cdPartIndicador int = 0
 as
-Select p1.cdParticipante, p1.nmParticipante, p1.dsApelido, p1.nrDDD, p1.nrTelefone,p1.cdPartIndicador, p2.nmParticipante, p1.dtEntrada, p1.dtCadastro, p1.flGeraLogin
+Select p1.cdParticipante, p1.nmParticipante, p1.dsApelido, p1.nrDDD, p1.nrTelefone,p1.cdPartIndicador, p2.nmParticipante as nmIndicador, p1.dtEntrada, p1.dtCadastro, p1.flGeraLogin
 
 from tbParticipante p1
 left join tbParticipante p2 on p1.cdPartIndicador = p2.cdParticipante

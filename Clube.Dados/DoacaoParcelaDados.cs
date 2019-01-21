@@ -62,6 +62,17 @@ namespace Clube.Dados
 
         }
 
+        public IEnumerable<DoacaoParcela> ConsultarTodasParcelasPorID(int id)
+        {
+            DataTable dt;
+            D = new AcessoDados();
+            D.AddParametro(@"idUsuario", SqlDbType.Int, id);
+            dt = D.GetDataTable("[ConsultarTodasParcelasPorID]");
+
+            var doacao = CarregaDados(dt);
+            return doacao;
+        }
+
         public IEnumerable<DoacaoParcela> ConsultarTodos()
         {
             throw new NotImplementedException();
