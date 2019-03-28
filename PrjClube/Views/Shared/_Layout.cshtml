@@ -21,6 +21,10 @@
         @* include _MenuControleDireito_Template.php *@
         @{Html.RenderPartial("_MenuControleDireito_Template");}
         <!-- MENU CONTROLE DIREITO - FIM -->
+        <div class="hide">
+            <input type="hidden" name="erro" value="@TempData["error"]" />
+            <input type="hidden" name="detalhe" value="@TempData["detalhe"]" />
+        </div>
     </div><!-- ./wrapper -->
     <!-- SCRIPTS TEMPLATE - INICIO -->
     @{Html.RenderPartial("_Scripts_Template");}

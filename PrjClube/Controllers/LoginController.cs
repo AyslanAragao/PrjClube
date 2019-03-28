@@ -11,10 +11,12 @@ namespace PrjClube.Controllers
     public class LoginController : Controller
     {
         LoginNegocio _negocio;
+        LogExcecaoNegocio _logExcecaoNegocio;
 
         public LoginController()
         {
             _negocio = new LoginNegocio();
+            _logExcecaoNegocio = new LogExcecaoNegocio();
         }
 
         public ActionResult Login()
@@ -30,7 +32,7 @@ namespace PrjClube.Controllers
                 if (_negocio.Logar(login))
                 //if (1 == 1)
                 {
-
+                    Session.Add("UsuarioLogado", _negocio);
                     return RedirectToAction("Index", "Home");
                 }
 
@@ -44,7 +46,7 @@ namespace PrjClube.Controllers
             {
                 TempData["Mensagem"] = "Usuario ou Senha incorreta";
                 TempData["TipoDialog"] = "error";
-                //Excecao.LogarErrro(ex, login.cdLogin);
+                _logExcecaoNegocio.Salvar(ex, login.cdLogin.ToString());
                 return View();
             }
         }

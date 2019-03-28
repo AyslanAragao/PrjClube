@@ -67,7 +67,7 @@ namespace Clube.Dados
             DataTable dt;
             D = new AcessoDados();
             D.AddParametro(@"idUsuario", SqlDbType.Int, id);
-            dt = D.GetDataTable("[ConsultarTodasParcelasPorID]");
+            dt = D.GetDataTable("sp_ConsultarTodasParcelasPorID");
 
             var doacao = CarregaDados(dt);
             return doacao;

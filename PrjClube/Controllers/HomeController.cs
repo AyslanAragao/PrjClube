@@ -10,60 +10,90 @@ using System.Web.Mvc;
 
 namespace PrjClube.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         IParticipanteNegocio _ServicoParticioante;
         ITipoPagamentoNegocio _ServicoPagamento;
         IDoacaoNegocio _ServicoDoacao;
+        LogExcecaoNegocio _LogExcecaoNegocio;
 
         public HomeController()
         {
             _ServicoParticioante = new ParticipanteNegocio();
             _ServicoPagamento = new TipoPagamentoNegocio();
             _ServicoDoacao = new DoacaoNegocio();
+            _LogExcecaoNegocio = new LogExcecaoNegocio();
 
         }
         public ActionResult Index()
         {
-            var doacoes = _ServicoDoacao.ConsultarTodos();
-            return View(doacoes);
+            try
+            {
+                if (UsuarioContinuaLogado())
+                {
+                    var doacoes = _ServicoDoacao.ConsultarTodos();
+                    return View(doacoes);
+                }
+                else
+                    return RedirectToAction("Login");
+            }
+            catch (Exception e)
+            {
+                TempData["erro"] = e.Message;
+                TempData["detalhe"] = e.StackTrace;
+                //_LogExcecaoNegocio.Salvar(e, login.cdLogin.ToString());
+                return RedirectToAction("Index", "Home");
+            }
+
+
         }
         [HttpPost]
         public ActionResult Index(Doacao doacao)
         {
-            TempData["nmParticipante"] = doacao.nmParticipante;
-            TempData["modoPagamento"] = doacao.cdTipoPagamento;
-            TempData["periodoDtDoacao"] = doacao.periodoDtDoacao;
-            
-            var doacoes = _ServicoDoacao.ConsultarNegocio(doacao);
-            return View(doacoes);
-        }
+            try
+            {
+                if (UsuarioContinuaLogado())
+                {
+                    TempData["nmParticipante"] = doacao.nmParticipante;
+                    TempData["modoPagamento"] = doacao.cdTipoPagamento;
+                    TempData["periodoDtDoacao"] = doacao.periodoDtDoacao;
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
+                    var doacoes = _ServicoDoacao.ConsultarNegocio(doacao);
+                    return View(doacoes);
+                }
+                else
+                    return RedirectToAction("Login");
+            }
+            catch (Exception e)
+            {
+                TempData["erro"] = e.Message;
+                TempData["detalhe"] = e.StackTrace;
+                return RedirectToAction("Index", "Home");
+            }
 
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
         }
 
         public ActionResult _mdlNovaDoacao()
         {
-            ViewBags();
+            if (UsuarioContinuaLogado())
+            {
+                ViewBags();
             return PartialView();
+            }
+            else
+                return RedirectToAction("Login");
         }
         [HttpPost]
         public ActionResult _mdlNovaDoacao(Doacao doacao)
         {
-            _ServicoDoacao.Cadastrar(doacao);
+            if (UsuarioContinuaLogado())
+            {
+                _ServicoDoacao.Cadastrar(doacao);
             TempData["Mensagem"] = "Doação cadastrado com sucesso";
             return RedirectToAction("Index");
+            }
+            else
+                return RedirectToAction("Login");
         }
 
 
@@ -76,9 +106,19 @@ namespace PrjClube.Controllers
 
         public string ConsultarParcelasDoacoes(int id)
         {
-            var doacoes = _ServicoDoacao.ConsultarTodasParcelasPorID(id);
-            string retorno = JsonConvert.SerializeObject(doacoes);
-            return retorno;
+            try
+            {
+                var doacoes = _ServicoDoacao.ConsultarTodasParcelasPorID(id);
+                string retorno = JsonConvert.SerializeObject(doacoes);
+                return retorno;
+            }
+            catch (Exception e)
+            {
+                TempData["erro"] = e.Message;
+                TempData["detalhe"] = e.StackTrace;
+                return "Ocorreu um erro";
+            }
+
         }
 
 

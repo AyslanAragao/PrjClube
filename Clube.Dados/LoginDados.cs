@@ -33,11 +33,11 @@ namespace Clube.Dados
                 D = new AcessoDados();
                 D.AddParametro("@login", SqlDbType.VarChar, login.nmLogin);
                 D.AddParametro("@senha", SqlDbType.VarChar, login.dsSenha);
-                D.AddParametro("@codigo", SqlDbType.Int, login.cdLogin);
+                D.AddParametro("@codigo", SqlDbType.Int, ParameterDirection.Output);
 
                 D.ExecProcedure("sp_verificaLogin");
 
-                if (D.Parametros["@codigo"].Value != null)
+                if (D.Parametros["@codigo"].Value.ToString() != "0" && D.Parametros["@codigo"].Value != null)
                 {
                     cdLogin = Convert.ToInt32(D.Parametros["@codigo"].Value);
                     //menu = MontarMenu();
