@@ -9,10 +9,13 @@ namespace PrjClube.Controllers
     {
         private readonly ITipoPagamentoNegocio _tipoPagamento;
         private readonly IParticipanteNegocio _participante;
+        LogExcecaoNegocio _LogExcecaoNegocio;
+
         public FuncoesController()
         {
             _tipoPagamento = new TipoPagamentoNegocio();
             _participante = new ParticipanteNegocio();
+            _LogExcecaoNegocio = new LogExcecaoNegocio();
         }
         // GET: Funcoes
         public ActionResult Index()
@@ -22,17 +25,39 @@ namespace PrjClube.Controllers
 
         public string GetModoPagamentos()
         {
-            var tp = _tipoPagamento.ConsultarTodos();
-            string retorno = JsonConvert.SerializeObject(tp);
+            string retorno = "";
+            try
+            {
+                var tp = _tipoPagamento.ConsultarTodos();
+                retorno = JsonConvert.SerializeObject(tp);
+            }
+            catch (System.Exception e)
+            {
+                string cdLogin = Session["cdLogin"].ToString();
+                _LogExcecaoNegocio.Salvar(e, cdLogin.ToString());
+
+                return retorno; ;
+            }
+
 
             return retorno;
         }
 
         public string GetParticipantes()
         {
-            var tp = _participante.ConsultarTodos();
-            string retorno = JsonConvert.SerializeObject(tp);
+            string retorno = "";
+            try
+            {
+                var tp = _participante.ConsultarTodos();
+                retorno = JsonConvert.SerializeObject(tp);
+            }
+            catch (System.Exception e)
+            {
+                string cdLogin = Session["cdLogin"].ToString();
+                _LogExcecaoNegocio.Salvar(e, cdLogin.ToString());
 
+                return retorno;
+            }
             return retorno;
         }
     }
