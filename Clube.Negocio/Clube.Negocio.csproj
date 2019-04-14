@@ -45,6 +45,7 @@
     <Compile Include="Interface\IParticipanteNegocio.cs" />
     <Compile Include="Interface\IBaseNegocio.cs" />
     <Compile Include="DoacaoNegocio.cs" />
+    <Compile Include="LogExcecaoNegocio.cs" />
     <Compile Include="TipoPagamentoNegocio.cs" />
     <Compile Include="ParticipanteNegocio.cs" />
     <Compile Include="LoginNegocio.cs" />

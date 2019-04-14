@@ -51,6 +51,7 @@
     <Compile Include="Interface\IParticipanteDados.cs" />
     <Compile Include="Interface\IBase.cs" />
     <Compile Include="DoacaoDados.cs" />
+    <Compile Include="LogExcecaoDados.cs" />
     <Compile Include="TipoPagamentoDados.cs" />
     <Compile Include="ParticipanteDados.cs" />
     <Compile Include="LoginDados.cs" />

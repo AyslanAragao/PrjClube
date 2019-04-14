@@ -15,10 +15,12 @@ namespace PrjClube.Controllers
 
 
         IParticipanteNegocio _participante;
+        LogExcecaoNegocio _LogExcecaoNegocio;
 
         public ParticipanteController()
         {
             _participante = new ParticipanteNegocio();
+            _LogExcecaoNegocio = new LogExcecaoNegocio();
         }
 
 
@@ -37,6 +39,8 @@ namespace PrjClube.Controllers
             {
                 TempData["erro"] = e.Message;
                 TempData["detalhe"] = e.StackTrace;
+                string cdLogin = Session["cdLogin"].ToString();
+                _LogExcecaoNegocio.Salvar(e, cdLogin.ToString());
                 return RedirectToAction("Index", "Home");
             }
 
@@ -65,6 +69,8 @@ namespace PrjClube.Controllers
             {
                 TempData["erro"] = e.Message;
                 TempData["detalhe"] = e.StackTrace;
+                string cdLogin = Session["cdLogin"].ToString();
+                _LogExcecaoNegocio.Salvar(e, cdLogin.ToString());
                 return RedirectToAction("Index", "Home");
             }
 
@@ -114,6 +120,8 @@ namespace PrjClube.Controllers
             {
                 TempData["erro"] = e.Message;
                 TempData["detalhe"] = e.StackTrace;
+                string cdLogin = Session["cdLogin"].ToString();
+                _LogExcecaoNegocio.Salvar(e, cdLogin.ToString());
                 return RedirectToAction("Index");
             }
         }
@@ -147,6 +155,8 @@ namespace PrjClube.Controllers
             {
                 TempData["erro"] = e.Message;
                 TempData["detalhe"] = e.StackTrace;
+                string cdLogin = Session["cdLogin"].ToString();
+                _LogExcecaoNegocio.Salvar(e, cdLogin.ToString());
                 return "";
             }
 

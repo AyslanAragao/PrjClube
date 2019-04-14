@@ -30,12 +30,12 @@
                         </div>
                         <div class="form-group col-lg-4">
                             <label class="titulo-input">Modo de Pagamento</label>
-                            <select id="ddmodoPagamento" name="modoPagamento" class="form-control form-control-sm"></select>
-                            <input id="hdmodoPagamento" type="hidden" value="@TempData["modoPagamento"]" />
+                            <select id="ddmodoPagamento" name="cdTipoPagamento" class="form-control form-control-sm"></select>
+                            <input id="hdmodoPagamento" type="hidden" name="cdTipoPagamento" value="@TempData["modoPagamento"]" />
                         </div>
                         <div class="form-group col-lg-4">
                             <label class="titulo-input">Dt. Doação</label>
-                            <input id="dtDoacao" name="periodoDtDoacao" type="text" class="form-control form-control-sm daterange" placeholder="dd/mm/aaaa" autocomplete=off value="@TempData["periodoDtDoacao"]" />
+                            <input id="dtDoacao" name="periodoDtDoacao" type="text" class="form-control form-control-sm" placeholder="dd/mm/aaaa" autocomplete=off value="@TempData["periodoDtDoacao"]" />
                         </div>
                     </div>
                 </section>
@@ -132,7 +132,7 @@
 
         if (dados.length <= 0)
             return "<h6> Não existe parcelas para essa doação</h6>";
-            else
+        else
             return '<table cellpadding="5" cellspacing="0" border="0" class="table table-striped table-hover table-condensed">' +
                 '<thead>' +
                 '<tr>' +
@@ -145,8 +145,8 @@
                 '</thead>' +
                 '<tbody>' +
                 dados
-                '</tbody>' +
-                '</table>';
+        '</tbody>' +
+            '</table>';
 
     }
 
@@ -193,6 +193,20 @@
                 row.child(format(row.data())).show();
                 tr.addClass('shown');
             }
+        });
+
+
+        $('#dtDoacao').daterangepicker({
+            autoUpdateInput: false,
+            locale: 'pt-br'
+        });
+
+        $('#dtDoacao').on('apply.daterangepicker', function (ev, picker) {
+            $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
+        });
+
+        $('#dtDoacao').on('cancel.daterangepicker', function (ev, picker) {
+            $(this).val('');
         });
 
     });

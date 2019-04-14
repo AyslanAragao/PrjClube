@@ -216,8 +216,6 @@
     <Content Include="Content\AdminLTE\js\adminlte.min.js" />
     <Content Include="Content\Componentes\bootstrap-datepicker\css\bootstrap-datepicker.min.css" />
     <Content Include="Content\Componentes\bootstrap-datepicker\js\bootstrap-datepicker.min.js" />
-    <Content Include="Content\Componentes\bootstrap-daterangepicker\daterangepicker.css" />
-    <Content Include="Content\Componentes\bootstrap-daterangepicker\daterangepicker.js" />
     <Content Include="Content\Componentes\bootstrap4\css\bootstrap.css" />
     <Content Include="Content\Componentes\bootstrap4\css\bootstrap.min.css" />
     <Content Include="Content\Componentes\bootstrap4\js\bootstrap.bundle.js" />
@@ -238,6 +236,8 @@
     <Content Include="Content\Componentes\datatables.net-bs\images\details_open.png" />
     <Content Include="Content\Componentes\datatables.net-bs\js\dataTables.bootstrap.min.js" />
     <Content Include="Content\Componentes\datatables.net\js\jquery.dataTables.min.js" />
+    <Content Include="Content\Componentes\daterangepicker\css\daterangepicker.css" />
+    <Content Include="Content\Componentes\daterangepicker\js\daterangepicker.js" />
     <Content Include="Content\Componentes\fastclick\lib\fastclick.js" />
     <Content Include="Content\Componentes\font-awesome\css\font-awesome.min.css" />
     <Content Include="Content\Componentes\font-awesome\fonts\fontawesome-webfont.svg" />

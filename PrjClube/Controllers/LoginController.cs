@@ -33,6 +33,7 @@ namespace PrjClube.Controllers
                 //if (1 == 1)
                 {
                     Session.Add("UsuarioLogado", _negocio);
+                    Session.Add("cdLogin", login.cdLogin);
                     return RedirectToAction("Index", "Home");
                 }
 

@@ -41,7 +41,8 @@ namespace PrjClube.Controllers
             {
                 TempData["erro"] = e.Message;
                 TempData["detalhe"] = e.StackTrace;
-                //_LogExcecaoNegocio.Salvar(e, login.cdLogin.ToString());
+                string cdLogin = Session["cdLogin"].ToString();
+                _LogExcecaoNegocio.Salvar(e, cdLogin.ToString());
                 return RedirectToAction("Index", "Home");
             }
 
@@ -68,6 +69,8 @@ namespace PrjClube.Controllers
             {
                 TempData["erro"] = e.Message;
                 TempData["detalhe"] = e.StackTrace;
+                string cdLogin = Session["cdLogin"].ToString();
+                _LogExcecaoNegocio.Salvar(e, cdLogin.ToString());
                 return RedirectToAction("Index", "Home");
             }
 
@@ -116,6 +119,8 @@ namespace PrjClube.Controllers
             {
                 TempData["erro"] = e.Message;
                 TempData["detalhe"] = e.StackTrace;
+                string cdLogin = Session["cdLogin"].ToString();
+                _LogExcecaoNegocio.Salvar(e, cdLogin.ToString());
                 return "Ocorreu um erro";
             }
 

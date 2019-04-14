@@ -19,7 +19,7 @@ namespace Clube.Dados
                 D.AddParametro("@Detalhe", SqlDbType.VarChar, Detalhe);
                 //D.AddParametro("@DtRegistro", SqlDbType.SmallDateTime, excecao.DtRegistro); //Esse campo deve ser getdate() na base
                 
-                D.ExecProcedure("sp_IncLogExcecao");
+                D.ExecProcedure("sp_cadException");
             }
             catch (Exception)
             {throw;}
